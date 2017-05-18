@@ -90,12 +90,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="黄泽安的Github博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。 2. Toolbar 使用打开res/values/styles.xml,设置如下： &amp;lt;12345678&amp;lt;!-- B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android学习笔记(1):ToolBar的使用">
+<meta property="og:url" content="http://yoursite.com/2017/05/18/Android学习笔记-1-ToolBar的使用/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
+<meta property="og:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。 2. Toolbar 使用打开res/values/styles.xml,设置如下： &amp;lt;12345678&amp;lt;!-- B">
+<meta property="og:updated_time" content="2017-05-18T09:35:23.189Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="黄泽安的Github博客">
+<meta name="twitter:title" content="Android学习笔记(1):ToolBar的使用">
+<meta name="twitter:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。 2. Toolbar 使用打开res/values/styles.xml,设置如下： &amp;lt;12345678&amp;lt;!-- B">
 
 
 
@@ -123,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/18/Android学习笔记-1-ToolBar的使用/"/>
 
 
 
 
 
-  <title>黄泽安的Github博客</title>
+  <title>Android学习笔记(1):ToolBar的使用 | 黄泽安的Github博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,9 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,9 +241,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -267,9 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/18/Android学习笔记-1-ToolBar的使用/" itemprop="url">Android学习笔记(1):ToolBar的使用</a></h1>
+          <h1 class="post-title" itemprop="name headline">Android学习笔记(1):ToolBar的使用</h1>
         
 
         <div class="post-meta">
@@ -316,26 +316,31 @@
       
 
       
-        
-          
-            <h2 id="1-Toolbar-介绍"><a href="#1-Toolbar-介绍" class="headerlink" title="1. Toolbar 介绍"></a>1. Toolbar 介绍</h2><p>ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。</p>
+        <h2 id="1-Toolbar-介绍"><a href="#1-Toolbar-介绍" class="headerlink" title="1. Toolbar 介绍"></a>1. Toolbar 介绍</h2><p>ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。</p>
 <h2 id="2-Toolbar-使用"><a href="#2-Toolbar-使用" class="headerlink" title="2. Toolbar 使用"></a>2. Toolbar 使用</h2><p>打开res/values/styles.xml,设置如下：</p>
 <p>&lt;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;!-- Base application theme. --&gt;</div><div class="line"> &lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</div><div class="line">     &lt;!-- Customize your theme here. --&gt;</div><div class="line">     &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</div><div class="line">     &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;</div><div class="line">     &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;</div><div class="line"> &lt;/style&gt;</div></pre></td></tr></table></figure></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
@@ -343,178 +348,38 @@
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/SHUAssistant 开发进度/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="黄泽安">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="黄泽安的Github博客">
-    </span>
-
-    
-      <header class="post-header">
-
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/13/SHUAssistant 开发进度/" itemprop="url">SHUAssistant开发进度</a></h1>
-        
+      
 
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-13T23:46:17+08:00">
-                2017-05-13
-              </time>
+              <a href="/2017/05/13/SHUAssistant 开发进度/" rel="next" title="SHUAssistant开发进度">
+                <i class="fa fa-chevron-left"></i> SHUAssistant开发进度
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="SHUAssistant"><a href="#SHUAssistant" class="headerlink" title="SHUAssistant"></a>SHUAssistant</h1><p>中国-上海大学学生校园网代理Android APP-SHUAssistant</p>
-<h2 id="开发日志"><a href="#开发日志" class="headerlink" title="开发日志"></a>开发日志</h2><h3 id="2017-4-10"><a href="#2017-4-10" class="headerlink" title="2017/4/10"></a>2017/4/10</h3><ul>
-<li>自动登录处理方法通过验证，运作稳定，效率较高。</li>
-</ul>
-<h3 id="2017-4-11"><a href="#2017-4-11" class="headerlink" title="2017/4/11"></a>2017/4/11</h3><ul>
-<li>选课系统获取课表页面开始开发。</li>
-</ul>
-<h3 id="2017-4-12"><a href="#2017-4-12" class="headerlink" title="2017/4/12"></a>2017/4/12</h3><ul>
-<li>完成获取选课系统课表测试与验证。</li>
-</ul>
-<h3 id="2017-4-13"><a href="#2017-4-13" class="headerlink" title="2017/4/13"></a>2017/4/13</h3><ul>
-<li>查询课程页面开始开发。</li>
-<li>UI设计提上日程。</li>
-</ul>
-<h3 id="2017-4-14"><a href="#2017-4-14" class="headerlink" title="2017/4/14"></a>2017/4/14</h3><ul>
-<li>查询课程任务测试数据通过。</li>
-<li>查询页面UI设计搁置。</li>
-</ul>
-<h3 id="2017-4-16"><a href="#2017-4-16" class="headerlink" title="2017/4/16"></a>2017/4/16</h3><ul>
-<li>完成课程查询UI</li>
-</ul>
-<h3 id="2017-4-17"><a href="#2017-4-17" class="headerlink" title="2017/4/17"></a>2017/4/17</h3><ul>
-<li>计算总页数与翻页功能在课程查询中实现。课程查询页面功能基本完善。</li>
-<li>修复一些小问题，简化了代码。</li>
-</ul>
-<h3 id="2017-4-18"><a href="#2017-4-18" class="headerlink" title="2017/4/18"></a>2017/4/18</h3><ul>
-<li>进一步完善代码容错性，针对不同的应用场景增加了判断处理：<blockquote>
-<ol>
-<li>自动缓存课表供离线查看:heavy_check_mark:</li>
-<li>耗时处理前增加ProgressBar提示:heavy_check_mark:</li>
-<li>通过检查网络连接提示选择查看课表或者设置网络来登录:heavy_check_mark:</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<h3 id="2017-4-20"><a href="#2017-4-20" class="headerlink" title="2017/4/20"></a>2017/4/20</h3><ul>
-<li>V1.0 ( V0.8-V1.0 ) 开始开发，从零开始。从头设计逻辑，重新规划界面，力图做到最好。</li>
-<li>作为初学安卓的开发者，一路砥砺前行，在此感谢室友<code>SUIBIAN</code>的帮助，为APP提出宝贵的建议，为界面的美化做出重大贡献。</li>
-</ul>
-<h3 id="2017-5-4"><a href="#2017-5-4" class="headerlink" title="2017/5/4"></a>2017/5/4</h3><ul>
-<li>V0.8合并到主分支完毕，完成了课表界面的编写，由室友<code>SUIBIAN</code>完成图标设计和部分UI界面设计。</li>
-<li>后续开发工作正在进行</li>
-</ul>
-<h3 id="2017-5-13"><a href="#2017-5-13" class="headerlink" title="2017/5/13"></a>2017/5/13</h3><ul>
-<li>FTP功能测试完成，通过在腾讯云的云服务器实例提供服务，可以检查，下载，安装更新。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -522,6 +387,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -541,8 +410,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -586,6 +464,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Toolbar-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Toolbar 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Toolbar-使用"><span class="nav-number">2.</span> <span class="nav-text">2. Toolbar 使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -706,6 +600,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
