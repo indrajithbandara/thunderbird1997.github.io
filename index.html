@@ -250,6 +250,121 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/Android学习笔记-3-Dialog对话框样式的Activity实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄泽安">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄泽安的Github博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/25/Android学习笔记-3-Dialog对话框样式的Activity实现/" itemprop="url">Android学习笔记-3-Dialog对话框样式的Activity实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T19:11:26+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-应用背景"><a href="#1-应用背景" class="headerlink" title="1. 应用背景"></a>1. 应用背景</h3><p>最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的<br>问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用<br>Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，<br>发现其实设置十分简单，下面把结果记录下来。</p>
+<h3 id="2-对话框样式的Activity实现"><a href="#2-对话框样式的Activity实现" class="headerlink" title="2. 对话框样式的Activity实现"></a>2. 对话框样式的Activity实现</h3><p>这种效果的实现方法其实十分简单，只需要给一个需要显示为对话框的Activity加上对话框的主题<br>即可。<br><br>首先在res/values/sytles.xml文件里新建一个样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style name=&quot;MyDialog&quot; parent=&quot;Theme.AppCompat.Light.Dialog&quot;&gt;</div><div class="line">     &lt;item name=&quot;windowNoTitle&quot;&gt;true&lt;/item&gt;</div><div class="line"> &lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>在AndroidManifest.xml文件里设置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:name=&quot;.(Activity名字)&quot;  </div><div class="line">          android:theme=&quot;@style/MyDialog&quot;&gt;</div><div class="line">&lt;/activity&gt;</div></pre></td></tr></table></figure></p>
+<p>只需要如上配置即可将一个Activity转化为一个Dialog样式。之后的布局设计和逻辑编写都和普通<br>Activity没有区别。我们可以调用StartActivityForResult方法调用该DialogActivity,通过<br>setResult方法和重写onActivityResult方法获取返回数据。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/Android学习笔记-2-DrawerLayout的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -318,7 +433,7 @@
       
         
           
-            <h2 id="1-DrawerLayout介绍"><a href="#1-DrawerLayout介绍" class="headerlink" title="1.DrawerLayout介绍"></a>1.DrawerLayout介绍</h2><p>DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。</p>
+            <h2 id="1-DrawerLayout介绍"><a href="#1-DrawerLayout介绍" class="headerlink" title="1. DrawerLayout介绍"></a>1. DrawerLayout介绍</h2><p>DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。</p>
 <h2 id="2-DrawerLayout-的使用"><a href="#2-DrawerLayout-的使用" class="headerlink" title="2. DrawerLayout 的使用"></a>2. DrawerLayout 的使用</h2><h4 id="（1）-布局文件"><a href="#（1）-布局文件" class="headerlink" title="（1） 布局文件"></a>（1） 布局文件</h4><p>要使用DrawerLayout,必须将其放在布局的最外层。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;android.support.v4.widget.DrawerLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">    android:id=&quot;@+id/...&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;&gt;</div><div class="line"></div><div class="line">    &lt;主页面布局&gt;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    &lt;/主页面布局&gt;</div><div class="line"></div><div class="line">    &lt;滑动菜单布局&gt;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    &lt;/滑动菜单布局&gt;</div></pre></td></tr></table></figure></p>
 <h4 id="（2）使用NavigationView"><a href="#（2）使用NavigationView" class="headerlink" title="（2）使用NavigationView"></a>（2）使用NavigationView</h4><p>NavigationView 是一个官方推出的一个简单实用的滑动菜单布局，这个菜单整体上分为两部分，上面一部分叫做HeaderLayout，下面的那些点击项是menu。因此，我们需要分别创建HeaderLayout和menu的配置文件才能通过NavigationView生成滑动菜单。</p>
 <p>首先，在res/layout/下创建NavigationView_HeaderLayout（或者其他名字）.xml文件，在里面编辑HeaderLayout布局。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;180dp&quot;（高度可以调整）</div><div class="line">    android:padding=&quot;20dp&quot;</div><div class="line">    android:background=&quot;@drawable/headerbackground&quot;&gt;</div><div class="line"></div><div class="line">&lt;/RelativeLayout&gt;</div></pre></td></tr></table></figure></p>
@@ -495,7 +610,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/SHUAssistant 开发进度/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/13/SHUAssistant-开发进度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄泽安">
@@ -514,7 +629,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/13/SHUAssistant 开发进度/" itemprop="url">SHUAssistant开发进度</a></h1>
+                <a class="post-title-link" href="/2017/05/13/SHUAssistant-开发进度/" itemprop="url">SHUAssistant-开发进度</a></h1>
         
 
         <div class="post-meta">
@@ -692,7 +807,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

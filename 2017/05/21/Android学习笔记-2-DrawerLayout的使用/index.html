@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="1.DrawerLayout介绍DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。 2. DrawerLayout 的使用（1） 布局文件要使用DrawerLayout,必须将其放在布局的最外层。123456789101112131415161718&amp;lt;android.support.v4.widget.DrawerLayout xmlns">
+<meta name="description" content="1. DrawerLayout介绍DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。 2. DrawerLayout 的使用（1） 布局文件要使用DrawerLayout,必须将其放在布局的最外层。123456789101112131415161718&amp;lt;android.support.v4.widget.DrawerLayout xmln">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android学习笔记-2-DrawerLayout的使用：滑动菜单">
 <meta property="og:url" content="http://yoursite.com/2017/05/21/Android学习笔记-2-DrawerLayout的使用/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
-<meta property="og:description" content="1.DrawerLayout介绍DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。 2. DrawerLayout 的使用（1） 布局文件要使用DrawerLayout,必须将其放在布局的最外层。123456789101112131415161718&amp;lt;android.support.v4.widget.DrawerLayout xmlns">
-<meta property="og:updated_time" content="2017-05-22T01:14:06.379Z">
+<meta property="og:description" content="1. DrawerLayout介绍DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。 2. DrawerLayout 的使用（1） 布局文件要使用DrawerLayout,必须将其放在布局的最外层。123456789101112131415161718&amp;lt;android.support.v4.widget.DrawerLayout xmln">
+<meta property="og:updated_time" content="2017-05-25T11:18:06.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记-2-DrawerLayout的使用：滑动菜单">
-<meta name="twitter:description" content="1.DrawerLayout介绍DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。 2. DrawerLayout 的使用（1） 布局文件要使用DrawerLayout,必须将其放在布局的最外层。123456789101112131415161718&amp;lt;android.support.v4.widget.DrawerLayout xmlns">
+<meta name="twitter:description" content="1. DrawerLayout介绍DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。 2. DrawerLayout 的使用（1） 布局文件要使用DrawerLayout,必须将其放在布局的最外层。123456789101112131415161718&amp;lt;android.support.v4.widget.DrawerLayout xmln">
 
 
 
@@ -316,7 +316,7 @@
       
 
       
-        <h2 id="1-DrawerLayout介绍"><a href="#1-DrawerLayout介绍" class="headerlink" title="1.DrawerLayout介绍"></a>1.DrawerLayout介绍</h2><p>DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。</p>
+        <h2 id="1-DrawerLayout介绍"><a href="#1-DrawerLayout介绍" class="headerlink" title="1. DrawerLayout介绍"></a>1. DrawerLayout介绍</h2><p>DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。</p>
 <h2 id="2-DrawerLayout-的使用"><a href="#2-DrawerLayout-的使用" class="headerlink" title="2. DrawerLayout 的使用"></a>2. DrawerLayout 的使用</h2><h4 id="（1）-布局文件"><a href="#（1）-布局文件" class="headerlink" title="（1） 布局文件"></a>（1） 布局文件</h4><p>要使用DrawerLayout,必须将其放在布局的最外层。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;android.support.v4.widget.DrawerLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">    android:id=&quot;@+id/...&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;&gt;</div><div class="line"></div><div class="line">    &lt;主页面布局&gt;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    &lt;/主页面布局&gt;</div><div class="line"></div><div class="line">    &lt;滑动菜单布局&gt;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    &lt;/滑动菜单布局&gt;</div></pre></td></tr></table></figure></p>
 <h4 id="（2）使用NavigationView"><a href="#（2）使用NavigationView" class="headerlink" title="（2）使用NavigationView"></a>（2）使用NavigationView</h4><p>NavigationView 是一个官方推出的一个简单实用的滑动菜单布局，这个菜单整体上分为两部分，上面一部分叫做HeaderLayout，下面的那些点击项是menu。因此，我们需要分别创建HeaderLayout和menu的配置文件才能通过NavigationView生成滑动菜单。</p>
 <p>首先，在res/layout/下创建NavigationView_HeaderLayout（或者其他名字）.xml文件，在里面编辑HeaderLayout布局。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;180dp&quot;（高度可以调整）</div><div class="line">    android:padding=&quot;20dp&quot;</div><div class="line">    android:background=&quot;@drawable/headerbackground&quot;&gt;</div><div class="line"></div><div class="line">&lt;/RelativeLayout&gt;</div></pre></td></tr></table></figure></p>
@@ -373,6 +373,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/25/Android学习笔记-3-Dialog对话框样式的Activity实现/" rel="prev" title="Android学习笔记-3-Dialog对话框样式的Activity实现">
+                Android学习笔记-3-Dialog对话框样式的Activity实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -444,7 +448,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -483,7 +487,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DrawerLayout介绍"><span class="nav-number">1.</span> <span class="nav-text">1.DrawerLayout介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DrawerLayout-的使用"><span class="nav-number">2.</span> <span class="nav-text">2. DrawerLayout 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）-布局文件"><span class="nav-number">2.0.1.</span> <span class="nav-text">（1） 布局文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）使用NavigationView"><span class="nav-number">2.0.2.</span> <span class="nav-text">（2）使用NavigationView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）-使用Fragment作自定义布局"><span class="nav-number">2.0.3.</span> <span class="nav-text">（3） 使用Fragment作自定义布局</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DrawerLayout介绍"><span class="nav-number">1.</span> <span class="nav-text">1. DrawerLayout介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DrawerLayout-的使用"><span class="nav-number">2.</span> <span class="nav-text">2. DrawerLayout 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）-布局文件"><span class="nav-number">2.0.1.</span> <span class="nav-text">（1） 布局文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）使用NavigationView"><span class="nav-number">2.0.2.</span> <span class="nav-text">（2）使用NavigationView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）-使用Fragment作自定义布局"><span class="nav-number">2.0.3.</span> <span class="nav-text">（3） 使用Fragment作自定义布局</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
