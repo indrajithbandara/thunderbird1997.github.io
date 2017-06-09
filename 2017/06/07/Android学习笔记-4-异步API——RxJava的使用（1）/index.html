@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/07/Android学习笔记-4-异步API——RxJava的使用（1）/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
 <meta property="og:description" content="最近做项目的时候在几个需要频繁使用网络请求获取数据，并且还要互相嵌套，出错后还需要重试。之前写的一段代码使用了许多嵌套回调，外加while死循环等待操作完成。这样不仅开销大，而且不便于后期的修改调试，于是在网上搜索一阵类似的解决方案，结果发现了一个十分流行的开源异步API库——RxJava。 本文是在我看了许多技术文章后通过一些总结（摘抄0.0）后的成果。 推荐看一下一篇总结的很不错的大牛博客：给">
-<meta property="og:updated_time" content="2017-06-09T04:50:15.704Z">
+<meta property="og:updated_time" content="2017-06-09T05:26:49.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记-4-异步API——RxJava的使用（1）">
 <meta name="twitter:description" content="最近做项目的时候在几个需要频繁使用网络请求获取数据，并且还要互相嵌套，出错后还需要重试。之前写的一段代码使用了许多嵌套回调，外加while死循环等待操作完成。这样不仅开销大，而且不便于后期的修改调试，于是在网上搜索一阵类似的解决方案，结果发现了一个十分流行的开源异步API库——RxJava。 本文是在我看了许多技术文章后通过一些总结（摘抄0.0）后的成果。 推荐看一下一篇总结的很不错的大牛博客：给">
@@ -292,6 +292,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Android 学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -320,10 +342,10 @@
 <p>本文是在我看了许多技术文章后通过一些总结（摘抄0.0）后的成果。</p>
 <p>推荐看一下一篇总结的很不错的大牛博客：<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></p>
 <p>这篇博客是基于RxJava1.x的，而现在则已经开发到了RxJava2.x，新版本增加了许多特性，也去除<br>了一些原版的功能。本文以及之后的一系列相关文章将以RxJava 2.x 为基础，在借鉴学习的的同时<br>加入一些RxJava2.x与RxJava 1.x不一样的地方，做出一些修改。</p>
-<h3 id="1-RxJava-简单使用"><a href="#1-RxJava-简单使用" class="headerlink" title="1.RxJava 简单使用"></a>1.RxJava 简单使用</h3><h4 id="1）-创建观察者"><a href="#1）-创建观察者" class="headerlink" title="1） 创建观察者"></a>1） 创建观察者</h4><p>观察者，即Observer，决定事件触发的时候将有怎样的行为。一个简单的接受String类型数据的 Observer<br>实现方式大致如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Observer&lt;String&gt; observer=new Observer&lt;String&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public void onSubscribe(@NonNull Disposable d) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onNext(@NonNull String s) &#123;</div><div class="line">              Log.d(tag, &quot;Item: &quot; + s);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onError(@NonNull Throwable e) &#123;</div><div class="line">              Log.d(tag, &quot;Error!&quot;);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onComplete() &#123;</div><div class="line">              Log.d(tag, &quot;Complete! &quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div></pre></td></tr></table></figure></p>
-<h4 id="2）创建被观察对象"><a href="#2）创建被观察对象" class="headerlink" title="2）创建被观察对象"></a>2）创建被观察对象</h4><p>被观察对象，即Observable，它决定什么时候触发事件以及触发怎样的事件。 RxJava 使用 create() 方法来创建一个 Observable ，并为它定义事件触发规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Observable.create(new ObservableOnSubscribe&lt;String&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public void subscribe(@NonNull ObservableEmitter&lt;String&gt; e) throws Exception &#123;</div><div class="line">              e.onNext(&quot;A&quot;);</div><div class="line">              e.onNext(&quot;B&quot;);</div><div class="line">              e.onNext(&quot;C&quot;);</div><div class="line">              e.onCompleted();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="1-RxJava-简单使用"><a href="#1-RxJava-简单使用" class="headerlink" title="1.RxJava 简单使用"></a>1.RxJava 简单使用</h3><h4 id="1-1-创建观察者"><a href="#1-1-创建观察者" class="headerlink" title="1.1 创建观察者"></a>1.1 创建观察者</h4><p>观察者，即Observer，决定事件触发的时候将有怎样的行为。一个简单的接受String类型数据的 Observer<br>实现方式大致如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Observer&lt;String&gt; observer=new Observer&lt;String&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public void onSubscribe(@NonNull Disposable d) &#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onNext(@NonNull String s) &#123;</div><div class="line">              Log.d(tag, &quot;Item: &quot; + s);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onError(@NonNull Throwable e) &#123;</div><div class="line">              Log.d(tag, &quot;Error!&quot;);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onComplete() &#123;</div><div class="line">              Log.d(tag, &quot;Complete! &quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div></pre></td></tr></table></figure></p>
+<h4 id="1-2-创建被观察对象"><a href="#1-2-创建被观察对象" class="headerlink" title="1.2 创建被观察对象"></a>1.2 创建被观察对象</h4><p>被观察对象，即Observable，它决定什么时候触发事件以及触发怎样的事件。 RxJava 使用 create() 方法来创建一个 Observable ，并为它定义事件触发规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Observable.create(new ObservableOnSubscribe&lt;String&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public void subscribe(@NonNull ObservableEmitter&lt;String&gt; e) throws Exception &#123;</div><div class="line">              e.onNext(&quot;A&quot;);</div><div class="line">              e.onNext(&quot;B&quot;);</div><div class="line">              e.onNext(&quot;C&quot;);</div><div class="line">              e.onCompleted();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
 <p>可以看到，这里传入了一个 ObservableOnSubscribe 对象作为参数。ObservableOnSubscribe 会被存储在返回的 Observable 对象中，它的作用相当于一个计划表，当 Observable 被订阅的时候，ObservableOnSubscribe 的 subscribe() 方法会自动被调用，事件序列就会依照设定依次触发（对于上面的代码，就是观察者 Subscriber 将会被调用三次 onNext() 和一次 onCompleted()）。这样，由被观察者调用了观察者的回调方法，就实现了由被观察者向观察者的事件传递，即观察者模式。</p>
-<h4 id="3-订阅"><a href="#3-订阅" class="headerlink" title="3) 订阅"></a>3) 订阅</h4><p>创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起来，整条链子就可以工作了。代码形式很简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(observer);</div></pre></td></tr></table></figure></p>
+<h4 id="1-3-订阅"><a href="#1-3-订阅" class="headerlink" title="1.3 订阅"></a>1.3 订阅</h4><p>创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起来，整条链子就可以工作了。代码形式很简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(observer);</div></pre></td></tr></table></figure></p>
 <p>这样，一个简单的按顺序输出字符串的异步操作流程就完成了。运行程序，输出结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Item: A</div><div class="line">Item: B</div><div class="line">Item: C</div><div class="line">Complete!</div></pre></td></tr></table></figure></p>
 
       
@@ -448,7 +470,25 @@
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
@@ -480,7 +520,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RxJava-简单使用"><span class="nav-number">1.</span> <span class="nav-text">1.RxJava 简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）-创建观察者"><span class="nav-number">1.1.</span> <span class="nav-text">1） 创建观察者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）创建被观察对象"><span class="nav-number">1.2.</span> <span class="nav-text">2）创建被观察对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-订阅"><span class="nav-number">1.3.</span> <span class="nav-text">3) 订阅</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RxJava-简单使用"><span class="nav-number">1.</span> <span class="nav-text">1.RxJava 简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-创建观察者"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 创建观察者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-创建被观察对象"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 创建被观察对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-订阅"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 订阅</span></a></li></ol></li></ol></div>
             
 
           </div>
