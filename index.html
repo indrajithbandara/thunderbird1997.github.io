@@ -339,18 +339,17 @@
 
       
         
-          
-            <p>最近做项目的时候在几个需要频繁使用网络请求获取数据，并且还要互相嵌套，出错后还需要重试。<br>之前写的一段代码使用了许多嵌套回调，外加while死循环等待操作完成。这样不仅开销大，而且不<br>便于后期的修改调试，于是在网上搜索一阵类似的解决方案，结果发现了一个十分流行的开源异步API<br>库——RxJava。</p>
+          <p>最近做项目的时候在几个需要频繁使用网络请求获取数据，并且还要互相嵌套，出错后还需要重试。<br>之前写的一段代码使用了许多嵌套回调，外加while死循环等待操作完成。这样不仅开销大，而且不<br>便于后期的修改调试，于是在网上搜索一阵类似的解决方案，结果发现了一个十分流行的开源异步API<br>库——RxJava。</p>
 <p>本文是在我看了许多技术文章后通过一些总结（摘抄0.0）后的成果。</p>
 <p>推荐看一下一篇总结的很不错的大牛博客：<a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></p>
 <p>这篇博客是基于RxJava1.x的，而现在则已经开发到了RxJava2.x，新版本增加了许多特性，也去除<br>了一些原版的功能。本文以及之后的一系列相关文章将以RxJava 2.x 为基础，在借鉴学习的的同时<br>加入一些RxJava2.x与RxJava 1.x不一样的地方，做出一些修改。</p>
-<h3 id="1-RxJava-简单使用"><a href="#1-RxJava-简单使用" class="headerlink" title="1.RxJava 简单使用"></a>1.RxJava 简单使用</h3><h4 id="1-1-创建观察者"><a href="#1-1-创建观察者" class="headerlink" title="1.1 创建观察者"></a>1.1 创建观察者</h4><p>观察者，即Observer，决定事件触发的时候将有怎样的行为。一个简单的接受String类型数据的 Observer<br>实现方式大致如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Observer&lt;String&gt; observer=<span class="keyword">new</span> Observer&lt;String&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSubscribe</span><span class="params">(@NonNull Disposable d)</span> </span>&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(@NonNull String s)</span> </span>&#123;</div><div class="line">              Log.d(tag, <span class="string">"Item: "</span> + s);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(@NonNull Throwable e)</span> </span>&#123;</div><div class="line">              Log.d(tag, <span class="string">"Error!"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">              Log.d(tag, <span class="string">"Complete! "</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div></pre></td></tr></table></figure></p>
-<h4 id="1-2-创建被观察对象"><a href="#1-2-创建被观察对象" class="headerlink" title="1.2 创建被观察对象"></a>1.2 创建被观察对象</h4><p>被观察对象，即Observable，它决定什么时候触发事件以及触发怎样的事件。 RxJava 使用 create() 方法来创建一个 Observable ，并为它定义事件触发规则：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Observable.create(<span class="keyword">new</span> ObservableOnSubscribe&lt;String&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(@NonNull ObservableEmitter&lt;String&gt; e)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">              e.onNext(<span class="string">"A"</span>);</div><div class="line">              e.onNext(<span class="string">"B"</span>);</div><div class="line">              e.onNext(<span class="string">"C"</span>);</div><div class="line">              e.onCompleted();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
-<p>可以看到，这里传入了一个 ObservableOnSubscribe 对象作为参数。ObservableOnSubscribe 会被存储在返回的 Observable 对象中，它的作用相当于一个计划表，当 Observable 被订阅的时候，ObservableOnSubscribe 的 subscribe() 方法会自动被调用，事件序列就会依照设定依次触发（对于上面的代码，就是观察者 Subscriber 将会被调用三次 onNext() 和一次 onCompleted()）。这样，由被观察者调用了观察者的回调方法，就实现了由被观察者向观察者的事件传递，即观察者模式。</p>
-<h4 id="1-3-订阅"><a href="#1-3-订阅" class="headerlink" title="1.3 订阅"></a>1.3 订阅</h4><p>创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起来，整条链子就可以工作了。代码形式很简单：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(observer);</div></pre></td></tr></table></figure></p>
-<p>这样，一个简单的按顺序输出字符串的异步操作流程就完成了。运行程序，输出结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Item: A</div><div class="line">Item: B</div><div class="line">Item: C</div><div class="line">Complete!</div></pre></td></tr></table></figure></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/07/Android学习笔记-4-异步API——RxJava的使用（1）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -481,13 +480,14 @@
 
       
         
-          
-            <h3 id="1-应用背景"><a href="#1-应用背景" class="headerlink" title="1. 应用背景"></a>1. 应用背景</h3><p>最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的<br>问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用<br>Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，<br>发现其实设置十分简单，下面把结果记录下来。</p>
-<h3 id="2-对话框样式的Activity实现"><a href="#2-对话框样式的Activity实现" class="headerlink" title="2. 对话框样式的Activity实现"></a>2. 对话框样式的Activity实现</h3><p>这种效果的实现方法其实十分简单，只需要给一个需要显示为对话框的Activity加上对话框的主题<br>即可。<br><br>首先在res/values/sytles.xml文件里新建一个样式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyDialog"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.Dialog"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowCloseOnTouchOutside"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在AndroidManifest.xml文件里设置如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".(Activity名字)"</span>  </span></div><div class="line">          <span class="attr">android:theme</span>=<span class="string">"@style/MyDialog"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>只需要如上配置即可将一个Activity转化为一个Dialog样式。之后的布局设计和逻辑编写都和普通<br>Activity没有区别。我们可以调用StartActivityForResult方法调用该DialogActivity,通过<br>setResult方法和重写onActivityResult方法获取返回数据。</p>
-
-          
+          <h3 id="1-应用背景"><a href="#1-应用背景" class="headerlink" title="1. 应用背景"></a>1. 应用背景</h3><p>最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的<br>问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用<br>Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，<br>发现其实设置十分简单，下面把结果记录下来。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/25/Android学习笔记-3-Dialog对话框样式的Activity实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -619,7 +619,6 @@
       
         
           <h2 id="1-DrawerLayout介绍"><a href="#1-DrawerLayout介绍" class="headerlink" title="1. DrawerLayout介绍"></a>1. DrawerLayout介绍</h2><p>DrawerLayout是谷歌官方推出的滑动菜单布局组件，使用它可以使我们快速地绘制漂亮实用的滑动菜单。</p>
-<h2 id="2-DrawerLayout-的使用"><a href="#2-DrawerLayout-的使用" class="headerlink" title="2. DrawerLayout 的使用"></a>2. DrawerLayout 的使用</h2><h4 id="2-1-布局文件"><a href="#2-1-布局文件" class="headerlink" title="2.1 布局文件"></a>2.1 布局文件</h4><p>要使用DrawerLayout,必须将其放在布局的最外层。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.DrawerLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/..."</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">主页面布局</span>&gt;</span></div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">主页面布局</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">滑动菜单布局</span>&gt;</span></div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">滑动菜单布局</span>&gt;</span></div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/21/Android学习笔记-2-DrawerLayout的使用/#more" rel="contents">
@@ -757,20 +756,14 @@
 
       
         
-          
-            <h2 id="1-Toolbar-介绍"><a href="#1-Toolbar-介绍" class="headerlink" title="1. Toolbar 介绍"></a>1. Toolbar 介绍</h2><p>ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。</p>
-<h2 id="2-Toolbar-使用"><a href="#2-Toolbar-使用" class="headerlink" title="2. Toolbar 使用"></a>2. Toolbar 使用</h2><p>打开res/values/styles.xml,设置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Base application theme. --&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="comment">&lt;!-- Customize your theme here. --&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>@color/colorPrimary<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>@color/colorPrimaryDark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorAccent"</span>&gt;</span>@color/colorAccent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>此段代码的作用是将主题设置为没有ActionBar的主题。</p>
-<p>之后编辑使用Toolbar的Activity的布局文件：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">&lt;android.support.design.widget.AppBarLayout</div><div class="line">        android:layout_width="match_parent"</div><div class="line">        android:layout_height="wrap_content"&gt;</div><div class="line"></div><div class="line">        &lt;android.support.v7.widget.Toolbar</div><div class="line">            android:id="@+id/mToolbar"  &lt;!--id可以自定义--&gt;</div><div class="line">            android:layout_width="match_parent"</div><div class="line">            android:layout_height="?attr/actionBarSize"</div><div class="line">            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"&gt;</div><div class="line"></div><div class="line">            &lt;!--标题布局可以自定义--&gt;</div><div class="line"></div><div class="line">        &lt;/android.support.v7.widget.Toolbar&gt;</div><div class="line"></div><div class="line">&lt;/android.support.design.widget.AppBarLayout&gt;</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure>
-<p>接下来在使用Toolbar的Activity里增加代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">toolbar=(Toolbar)findViewById(R.id.mToolbar);</div><div class="line">        toolbar.setTitle(<span class="string">""</span>);</div><div class="line">        setSupportActionBar(toolbar);</div><div class="line">        ActionBar actionBar=getSupportActionBar();</div></pre></td></tr></table></figure>
-<p>这里获取到的Actionbar即为Actionbar的实例。</p>
-<p>如果要在ToolBar左侧加上返回或者菜单按钮，可以在Activitiy中相关代码下追加：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(actionBar!=<span class="keyword">null</span>)&#123;</div><div class="line">            actionBar.setDisplayHomeAsUpEnabled(<span class="keyword">true</span>);</div><div class="line">            actionBar.setHomeAsUpIndicator(R.mipmap.图标资源名);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-
-          
+          <h2 id="1-Toolbar-介绍"><a href="#1-Toolbar-介绍" class="headerlink" title="1. Toolbar 介绍"></a>1. Toolbar 介绍</h2><p>ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/18/Android学习笔记-1-ToolBar的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -901,55 +894,15 @@
 
       
         
-          
-            <h1 id="SHUAssistant"><a href="#SHUAssistant" class="headerlink" title="SHUAssistant"></a>SHUAssistant</h1><p>中国-上海大学学生校园网代理Android APP-SHUAssistant</p>
-<h2 id="开发日志"><a href="#开发日志" class="headerlink" title="开发日志"></a>开发日志</h2><h3 id="2017-4-10"><a href="#2017-4-10" class="headerlink" title="2017-4-10"></a>2017-4-10</h3><ul>
-<li>自动登录处理方法通过验证，运作稳定，效率较高。</li>
-</ul>
-<h3 id="2017-4-11"><a href="#2017-4-11" class="headerlink" title="2017-4-11"></a>2017-4-11</h3><ul>
-<li>选课系统获取课表页面开始开发。</li>
-</ul>
-<h3 id="2017-4-12"><a href="#2017-4-12" class="headerlink" title="2017-4-12"></a>2017-4-12</h3><ul>
-<li>完成获取选课系统课表测试与验证。</li>
-</ul>
-<h3 id="2017-4-13"><a href="#2017-4-13" class="headerlink" title="2017-4-13"></a>2017-4-13</h3><ul>
-<li>查询课程页面开始开发。</li>
-<li>UI设计提上日程。</li>
-</ul>
-<h3 id="2017-4-14"><a href="#2017-4-14" class="headerlink" title="2017-4-14"></a>2017-4-14</h3><ul>
-<li>查询课程任务测试数据通过。</li>
-<li>查询页面UI设计搁置。</li>
-</ul>
-<h3 id="2017-4-16"><a href="#2017-4-16" class="headerlink" title="2017-4-16"></a>2017-4-16</h3><ul>
-<li>完成课程查询UI</li>
-</ul>
-<h3 id="2017-4-17"><a href="#2017-4-17" class="headerlink" title="2017-4-17"></a>2017-4-17</h3><ul>
-<li>计算总页数与翻页功能在课程查询中实现。课程查询页面功能基本完善。</li>
-<li>修复一些小问题，简化了代码。</li>
-</ul>
-<h3 id="2017-4-18"><a href="#2017-4-18" class="headerlink" title="2017-4-18"></a>2017-4-18</h3><ul>
-<li>进一步完善代码容错性，针对不同的应用场景增加了判断处理。</li>
-</ul>
-<h3 id="2017-4-20"><a href="#2017-4-20" class="headerlink" title="2017-4-20"></a>2017-4-20</h3><ul>
-<li>V1.0 ( V0.8-V1.0 ) 开始开发，从零开始。从头设计逻辑，重新规划界面，力图做到最好。</li>
-<li>作为初学安卓的开发者，一路砥砺前行，在此感谢室友<code>SUIBIAN</code>的帮助，为APP提出宝贵的建议，<br>为界面的美化做出重大贡献。</li>
-</ul>
-<h3 id="2017-5-4"><a href="#2017-5-4" class="headerlink" title="2017-5-4"></a>2017-5-4</h3><ul>
-<li>V0.8合并到主分支完毕，完成了课表界面的编写，由室友<code>SUIBIAN</code>完成图标设计和部分UI界面设计。</li>
-<li>后续开发工作正在进行</li>
-</ul>
-<h3 id="2017-5-13"><a href="#2017-5-13" class="headerlink" title="2017-5-13"></a>2017-5-13</h3><ul>
-<li>FTP功能测试完成，通过在腾讯云的云服务器实例提供服务，可以检查，下载，安装更新。</li>
-</ul>
-<h3 id="2017-5-18"><a href="#2017-5-18" class="headerlink" title="2017-5-18"></a>2017-5-18</h3><ul>
-<li>自定义UI——DeleteEditText 初次尝试完成。</li>
-<li>tesseract识别引擎训练数据将会自动从asset文件夹中复制到程序缓存，摆脱手动安装（终于解决了）。</li>
-</ul>
-<h3 id="2017-5-25"><a href="#2017-5-25" class="headerlink" title="2017-5-25"></a>2017-5-25</h3><ul>
-<li>加入了服务器检测切换功能以及当前学期，周判断（设置功能仍在开发中），但由于学校服务器切换方式诡异，以及神奇的夏季学期，估计会有不少问题。</li>
-</ul>
-
-          
+          <h1 id="SHUAssistant"><a href="#SHUAssistant" class="headerlink" title="SHUAssistant"></a>SHUAssistant</h1><p>中国-上海大学学生校园网代理Android APP-SHUAssistant</p>
+<h2 id="开发日志"><a href="#开发日志" class="headerlink" title="开发日志"></a>开发日志</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/13/SHUAssistant-开发进度/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

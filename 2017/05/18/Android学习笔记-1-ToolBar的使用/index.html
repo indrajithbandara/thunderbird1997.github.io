@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。 2. Toolbar 使用打开res/values/styles.xml,设置如下： 1234567&amp;lt;!-- Base a">
+<meta name="description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android学习笔记(1):ToolBar的使用">
 <meta property="og:url" content="http://yoursite.com/2017/05/18/Android学习笔记-1-ToolBar的使用/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
-<meta property="og:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。 2. Toolbar 使用打开res/values/styles.xml,设置如下： 1234567&amp;lt;!-- Base a">
-<meta property="og:updated_time" content="2017-06-09T05:44:58.168Z">
+<meta property="og:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。">
+<meta property="og:updated_time" content="2017-06-09T05:50:03.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记(1):ToolBar的使用">
-<meta name="twitter:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。 2. Toolbar 使用打开res/values/styles.xml,设置如下： 1234567&amp;lt;!-- Base a">
+<meta name="twitter:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。">
 
 
 
@@ -339,6 +339,7 @@
 
       
         <h2 id="1-Toolbar-介绍"><a href="#1-Toolbar-介绍" class="headerlink" title="1. Toolbar 介绍"></a>1. Toolbar 介绍</h2><p>ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。</p>
+<a id="more"></a>
 <h2 id="2-Toolbar-使用"><a href="#2-Toolbar-使用" class="headerlink" title="2. Toolbar 使用"></a>2. Toolbar 使用</h2><p>打开res/values/styles.xml,设置如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Base application theme. --&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="comment">&lt;!-- Customize your theme here. --&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>@color/colorPrimary<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>@color/colorPrimaryDark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorAccent"</span>&gt;</span>@color/colorAccent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>此段代码的作用是将主题设置为没有ActionBar的主题。</p>

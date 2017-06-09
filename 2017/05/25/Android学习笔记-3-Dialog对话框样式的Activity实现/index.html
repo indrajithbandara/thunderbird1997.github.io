@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="1. 应用背景最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，发现其实设置十分简单，下面把结果记录下来。 2. 对话框样式的Activity实现这种效果的实现方法其">
+<meta name="description" content="1. 应用背景最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，发现其实设置十分简单，下面把结果记录下来。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android学习笔记-3-Dialog对话框样式的Activity实现">
 <meta property="og:url" content="http://yoursite.com/2017/05/25/Android学习笔记-3-Dialog对话框样式的Activity实现/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
-<meta property="og:description" content="1. 应用背景最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，发现其实设置十分简单，下面把结果记录下来。 2. 对话框样式的Activity实现这种效果的实现方法其">
-<meta property="og:updated_time" content="2017-06-09T05:44:07.913Z">
+<meta property="og:description" content="1. 应用背景最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，发现其实设置十分简单，下面把结果记录下来。">
+<meta property="og:updated_time" content="2017-06-09T05:50:00.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记-3-Dialog对话框样式的Activity实现">
-<meta name="twitter:description" content="1. 应用背景最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，发现其实设置十分简单，下面把结果记录下来。 2. 对话框样式的Activity实现这种效果的实现方法其">
+<meta name="twitter:description" content="1. 应用背景最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，发现其实设置十分简单，下面把结果记录下来。">
 
 
 
@@ -339,6 +339,7 @@
 
       
         <h3 id="1-应用背景"><a href="#1-应用背景" class="headerlink" title="1. 应用背景"></a>1. 应用背景</h3><p>最近在做项目的时候，遇到了要显示对话框，又要锁定用户其他操作，还要编写较复杂逻辑代码的<br>问题，用AlertDialog实现非常困难。考虑到要以对话框形式呈现，因此经过几番思索，想到可以用<br>Dialog样式的Activity，可以保证显示的美观以及逻辑编写的清晰方便。通过网络上的搜索学习，<br>发现其实设置十分简单，下面把结果记录下来。</p>
+<a id="more"></a>
 <h3 id="2-对话框样式的Activity实现"><a href="#2-对话框样式的Activity实现" class="headerlink" title="2. 对话框样式的Activity实现"></a>2. 对话框样式的Activity实现</h3><p>这种效果的实现方法其实十分简单，只需要给一个需要显示为对话框的Activity加上对话框的主题<br>即可。<br><br>首先在res/values/sytles.xml文件里新建一个样式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyDialog"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.Dialog"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowCloseOnTouchOutside"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>在AndroidManifest.xml文件里设置如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".(Activity名字)"</span>  </span></div><div class="line">          <span class="attr">android:theme</span>=<span class="string">"@style/MyDialog"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>只需要如上配置即可将一个Activity转化为一个Dialog样式。之后的布局设计和逻辑编写都和普通<br>Activity没有区别。我们可以调用StartActivityForResult方法调用该DialogActivity,通过<br>setResult方法和重写onActivityResult方法获取返回数据。</p>
