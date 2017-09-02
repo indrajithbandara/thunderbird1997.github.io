@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。">
+<meta name="description" content="1. CollapsingToolBarLayout 介绍CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android学习笔记-1-ToolBar的使用">
-<meta property="og:url" content="http://yoursite.com/2017/05/18/Android学习笔记-1-ToolBar的使用/index.html">
+<meta property="og:title" content="Android学习笔记-1-CollapsingToolBarLayout：可折叠的工具栏">
+<meta property="og:url" content="http://yoursite.com/2017/09/02/Android学习笔记-5-CollapsingToolBarLayout/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
-<meta property="og:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。">
-<meta property="og:updated_time" content="2017-09-02T01:25:36.072Z">
+<meta property="og:description" content="1. CollapsingToolBarLayout 介绍CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。">
+<meta property="og:updated_time" content="2017-09-02T06:25:10.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android学习笔记-1-ToolBar的使用">
-<meta name="twitter:description" content="1. Toolbar 介绍ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。">
+<meta name="twitter:title" content="Android学习笔记-1-CollapsingToolBarLayout：可折叠的工具栏">
+<meta name="twitter:description" content="1. CollapsingToolBarLayout 介绍CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/18/Android学习笔记-1-ToolBar的使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/02/Android学习笔记-5-CollapsingToolBarLayout/"/>
 
 
 
 
 
-  <title>Android学习笔记-1-ToolBar的使用 | 黄泽安的Github博客</title>
+  <title>Android学习笔记-1-CollapsingToolBarLayout：可折叠的工具栏 | 黄泽安的Github博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +252,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/Android学习笔记-1-ToolBar的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/02/Android学习笔记-5-CollapsingToolBarLayout/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="黄泽安">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android学习笔记-1-ToolBar的使用</h1>
+          <h1 class="post-title" itemprop="name headline">Android学习笔记-1-CollapsingToolBarLayout：可折叠的工具栏</h1>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T17:10:55+08:00">
-                2017-05-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-02T14:25:10+08:00">
+                2017-09-02
               </time>
             
 
@@ -338,18 +338,17 @@
       
 
       
-        <h2 id="1-Toolbar-介绍"><a href="#1-Toolbar-介绍" class="headerlink" title="1. Toolbar 介绍"></a>1. Toolbar 介绍</h2><p>ToolBar的出现是为了替换之前的ActionBar的各种不灵活使用方式。ActionBar的位置只能限定在窗口顶端，相反，ToolBar的使用非常灵活，因为它可以让我们自由往里面添加子控件。低版本要使用的话,可以添加support-v7包。</p>
+        <h2 id="1-CollapsingToolBarLayout-介绍"><a href="#1-CollapsingToolBarLayout-介绍" class="headerlink" title="1. CollapsingToolBarLayout 介绍"></a>1. CollapsingToolBarLayout 介绍</h2><p>CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。</p>
 <a id="more"></a>
-<h2 id="2-Toolbar-使用"><a href="#2-Toolbar-使用" class="headerlink" title="2. Toolbar 使用"></a>2. Toolbar 使用</h2><p>打开res/values/styles.xml,设置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- Base application theme. --&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="comment">&lt;!-- Customize your theme here. --&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>@color/colorPrimary<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>@color/colorPrimaryDark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorAccent"</span>&gt;</span>@color/colorAccent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>此段代码的作用是将主题设置为没有ActionBar的主题。</p>
-<p>之后编辑使用Toolbar的Activity的布局文件：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">&lt;android.support.design.widget.AppBarLayout</div><div class="line">        android:layout_width="match_parent"</div><div class="line">        android:layout_height="wrap_content"&gt;</div><div class="line"></div><div class="line">        &lt;android.support.v7.widget.Toolbar</div><div class="line">            android:id="@+id/mToolbar"  &lt;!--id可以自定义--&gt;</div><div class="line">            android:layout_width="match_parent"</div><div class="line">            android:layout_height="?attr/actionBarSize"</div><div class="line">            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"&gt;</div><div class="line"></div><div class="line">            &lt;!--标题布局可以自定义--&gt;</div><div class="line"></div><div class="line">        &lt;/android.support.v7.widget.Toolbar&gt;</div><div class="line"></div><div class="line">&lt;/android.support.design.widget.AppBarLayout&gt;</div><div class="line"></div><div class="line">...</div></pre></td></tr></table></figure>
-<p>接下来在使用Toolbar的Activity里增加代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">toolbar=(Toolbar)findViewById(R.id.mToolbar);</div><div class="line">        toolbar.setTitle(<span class="string">""</span>);</div><div class="line">        setSupportActionBar(toolbar);</div><div class="line">        ActionBar actionBar=getSupportActionBar();</div></pre></td></tr></table></figure>
-<p>这里获取到的Actionbar即为Actionbar的实例。</p>
-<p>如果要在ToolBar左侧加上返回或者菜单按钮，可以在Activitiy中相关代码下追加：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(actionBar!=<span class="keyword">null</span>)&#123;</div><div class="line">            actionBar.setDisplayHomeAsUpEnabled(<span class="keyword">true</span>);</div><div class="line">            actionBar.setHomeAsUpIndicator(R.mipmap.图标资源名);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h2 id="2-CollapsingToolbarLayout-基本使用"><a href="#2-CollapsingToolbarLayout-基本使用" class="headerlink" title="2. CollapsingToolbarLayout 基本使用"></a>2. CollapsingToolbarLayout 基本使用</h2><p>打开Activity的布局文件，加入如下头布局：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">&lt;android.support.design.widget.CoordinatorLayout</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;match_parent&quot;&gt;</div><div class="line"></div><div class="line">        &lt;android.support.design.widget.AppBarLayout</div><div class="line">            android:id=&quot;@+id/CourseQueryAppBarLayout&quot;</div><div class="line">            android:layout_width=&quot;match_parent&quot;</div><div class="line">            android:layout_height=&quot;...&quot;&gt;</div><div class="line"></div><div class="line">            &lt;android.support.design.widget.CollapsingToolbarLayout</div><div class="line">                android:id=&quot;@+id/...&quot;</div><div class="line">                android:layout_width=&quot;match_parent&quot;</div><div class="line">                android:layout_height=&quot;match_parent&quot;</div><div class="line">                android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark.ActionBar&quot;</div><div class="line">                app:layout_scrollFlags=&quot;scroll|exitUntilCollapsed|snap&quot;&gt;</div><div class="line"></div><div class="line">                ...&lt;折叠工具栏的视图&gt;</div><div class="line">                &lt;ImageView</div><div class="line">                    ...</div><div class="line">                    app:layout_collapseMode=&apos;parallex&apos;</div><div class="line">                /&gt;</div><div class="line"></div><div class="line">                &lt;Android.support.v7.widget.Toolbar</div><div class="line">                    ...</div><div class="line">                    app:layout_collapseMode=&apos;pin&apos;</div><div class="line">                &gt;</div><div class="line"></div><div class="line">            &lt;/android.support.design.widget.CollapsingToolbarLayout&gt;</div><div class="line"></div><div class="line">        &lt;/android.support.design.widget.AppBarLayout&gt;</div><div class="line"></div><div class="line">        ...</div><div class="line">        </div><div class="line">        &lt;内容布局&gt;  </div><div class="line"></div><div class="line">&lt;/android.support.design.widget.CoordinatorLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>其中，app:layout_scrollFlags 选项控制着滑动的方式。一共有5种自带的方式，详情可以看这篇博客：<link><a href="http://www.jianshu.com/p/7caa5f4f49bd" target="_blank" rel="external">http://www.jianshu.com/p/7caa5f4f49bd</a><br><br> app:layout_collapseMode 选项控制滑动时控件的滑动效果。</p>
+<ol>
+<li>parallex 在折叠的时候有错位偏移的效果</li>
+<li>pin 在折叠的时候位置最后固定在顶端</li>
+<li>none 无滑动</li>
+</ol>
+<h2 id="3-监听-CollapsingToolbarLayout-的滑动"><a href="#3-监听-CollapsingToolbarLayout-的滑动" class="headerlink" title="3. 监听 CollapsingToolbarLayout 的滑动"></a>3. 监听 CollapsingToolbarLayout 的滑动</h2><p>要监听滑动事件其实很简单，只要在Activity里加入如下的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">AppBarLayout appBarLayout = ...;</div><div class="line">appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) &#123;</div><div class="line">                //监听事件代码</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure></p>
+<p>其中verticalOffset即为ApPBarLayout展开的大小，0为完全展开，折叠时随着程度的变化数值越变越小。总的值可以用appBarLayout.getTotalScrollRange()来获得。<font color="red">注：此方法获得的值是正数，而verticalOffset是0或负值，因此转换时要注意符号。</font></p>
 
       
     </div>
@@ -386,8 +385,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/13/上大校园网代理-开发进度/" rel="next" title="上大校园网代理-开发进度">
-                <i class="fa fa-chevron-left"></i> 上大校园网代理-开发进度
+              <a href="/2017/06/07/Android学习笔记-4-异步API——RxJava的使用/" rel="next" title="Android学习笔记-4-异步API——RxJava的使用">
+                <i class="fa fa-chevron-left"></i> Android学习笔记-4-异步API——RxJava的使用
               </a>
             
           </div>
@@ -395,10 +394,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/21/Android学习笔记-2-DrawerLayout的使用/" rel="prev" title="Android学习笔记-2-DrawerLayout的使用：滑动菜单">
-                Android学习笔记-2-DrawerLayout的使用：滑动菜单 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,7 +513,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Toolbar-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Toolbar 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Toolbar-使用"><span class="nav-number">2.</span> <span class="nav-text">2. Toolbar 使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-CollapsingToolBarLayout-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. CollapsingToolBarLayout 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-CollapsingToolbarLayout-基本使用"><span class="nav-number">2.</span> <span class="nav-text">2. CollapsingToolbarLayout 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-监听-CollapsingToolbarLayout-的滑动"><span class="nav-number">3.</span> <span class="nav-text">3. 监听 CollapsingToolbarLayout 的滑动</span></a></li></ol></div>
             
 
           </div>
