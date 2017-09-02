@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/02/Android学习笔记-5-CollapsingToolBarLayout/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
 <meta property="og:description" content="1. CollapsingToolBarLayout 介绍CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。">
-<meta property="og:updated_time" content="2017-09-02T06:30:40.530Z">
+<meta property="og:updated_time" content="2017-09-02T15:40:54.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android学习笔记-5-CollapsingToolBarLayout：可折叠的工具栏">
 <meta name="twitter:description" content="1. CollapsingToolBarLayout 介绍CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。">
@@ -341,7 +341,7 @@
         <h2 id="1-CollapsingToolBarLayout-介绍"><a href="#1-CollapsingToolBarLayout-介绍" class="headerlink" title="1. CollapsingToolBarLayout 介绍"></a>1. CollapsingToolBarLayout 介绍</h2><p>CollapsingToolbarLayout是提供了一个可以折叠的Toolbar，它继承至FrameLayout，可以实现展开与折叠的惊艳效果。</p>
 <a id="more"></a>
 <h2 id="2-CollapsingToolbarLayout-基本使用"><a href="#2-CollapsingToolbarLayout-基本使用" class="headerlink" title="2. CollapsingToolbarLayout 基本使用"></a>2. CollapsingToolbarLayout 基本使用</h2><p>打开Activity的布局文件，加入如下头布局：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.CoordinatorLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/CourseQueryAppBarLayout"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"..."</span>&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">android.support.design.widget.CollapsingToolbarLayout</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/..."</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:theme</span>=<span class="string">"@style/ThemeOverlay.AppCompat.Dark.ActionBar"</span></div><div class="line">                <span class="attr">app:layout_scrollFlags</span>=<span class="string">"scroll|exitUntilCollapsed|snap"</span>&gt;</div><div class="line"></div><div class="line">                ...<span class="tag">&lt;<span class="name">折叠工具栏的视图</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                    <span class="attr">...</span></div><div class="line">                    <span class="attr">app:layout_collapseMode</span>=<span class="string">'parallex'</span></div><div class="line">                /&gt;</div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">Android.support.v7.widget.Toolbar</span></span></div><div class="line">                    <span class="attr">...</span></div><div class="line">                    <span class="attr">app:layout_collapseMode</span>=<span class="string">'pin'</span></div><div class="line">                &gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;/<span class="name">android.support.design.widget.CollapsingToolbarLayout</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></div><div class="line"></div><div class="line">        ...</div><div class="line">        </div><div class="line">        <span class="tag">&lt;<span class="name">内容布局</span>&gt;</span>  </div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>其中，app:layout_scrollFlags 选项控制着滑动的方式。一共有5种自带的方式，详情可以看这篇博客：<link><a href="http://www.jianshu.com/p/7caa5f4f49bd" target="_blank" rel="external">http://www.jianshu.com/p/7caa5f4f49bd</a><br><br> app:layout_collapseMode 选项控制滑动时控件的滑动效果。</p>
+<p>其中，app:layout_scrollFlags 选项控制着滑动的方式。一共有5种自带的方式，详情可以看这篇博客：<a href="http://www.jianshu.com/p/7caa5f4f49bd" target="_blank" rel="external">Android 详细分析AppBarLayout的五种ScrollFlags</a><br><br> app:layout_collapseMode 选项控制滑动时控件的滑动效果。</p>
 <ol>
 <li>parallex 在折叠的时候有错位偏移的效果</li>
 <li>pin 在折叠的时候位置最后固定在顶端</li>
@@ -394,6 +394,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/02/Android学习笔记-6-ButterKnife基本使用/" rel="prev" title="Android学习笔记-6-ButterKnife基本使用">
+                Android学习笔记-6-ButterKnife基本使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -465,7 +469,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
