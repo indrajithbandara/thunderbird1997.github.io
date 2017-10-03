@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?{2}^{31}-{1}">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?-{2}^{63}">
 <meta property="og:image" content="http://latex.codecogs.com/png.latex?{2}^{63}-{1}">
-<meta property="og:updated_time" content="2017-09-30T12:44:58.185Z">
+<meta property="og:updated_time" content="2017-10-01T11:45:06.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Everything is an Object:万物皆为对象">
 <meta name="twitter:description" content="Java与面向对象 Although it is based on C++, Java is more of a “pure” object-orientedlanguage.尽管基于C++，java相较之下更能称之为一种纯粹的面向对象的语言。  由于C++需要对C语言提供向下兼容性，这导致C++包含了许多其自身不期望的特性，这使得C++在某些方面变得过于复杂。然而Java语言确保你所做的完全是面">
@@ -464,19 +464,19 @@
 <p>如上的这个类只是一个创建的示例，这个类什么事情都做不了。为了使它可以做一些事情，我们需要为它添加数据成员和成员方法。</p>
 <h3 id="数据成员和成员方法"><a href="#数据成员和成员方法" class="headerlink" title="数据成员和成员方法"></a>数据成员和成员方法</h3><blockquote>
 <p>When you define a class, you can put two types of elements in your class:<br><strong>fields</strong> (sometimes called <strong>data members</strong>), and <strong>methods</strong> (sometimes called <strong>member functions</strong>).<br></p>
-<p>定义一个类的时候，里面可以有两种元素：域（也称为数据成员）和方法（也称为成员函数）。</p>
+<p>定义一个类的时候，里面可以有两种元素：字段（也称为数据成员）和方法（也称为成员函数）。</p>
 </blockquote>
-<h4 id="域-数据成员"><a href="#域-数据成员" class="headerlink" title="域(数据成员)"></a>域(数据成员)</h4><blockquote>
-<p>A field is an object of any type that you can talk to via its reference, or a primitive type. If it is<br>a reference to an object, you must initialize that reference to connect it to an actual object.<br><br>域是任何的你可以通过它的引用来交互的对象或基本类型变量。如果它是一个引用，你应该初始化它来指向一个实际存在的对象。</p>
+<h4 id="字段-数据成员"><a href="#字段-数据成员" class="headerlink" title="字段(数据成员)"></a>字段(数据成员)</h4><blockquote>
+<p>A field is an object of any type that you can talk to via its reference, or a primitive type. If it is<br>a reference to an object, you must initialize that reference to connect it to an actual object.<br><br>字段是任何的你可以通过它的引用来交互的对象或基本类型变量。如果它是一个引用，你应该初始化它来指向一个实际存在的对象。</p>
 </blockquote>
 <ul>
-<li><p>在类中加入域：</p>
+<li><p>在类中加入字段：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Object</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">    <span class="keyword">double</span> b;</div><div class="line">    <span class="keyword">boolean</span> c;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>引用域：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Object object=<span class="keyword">new</span> Object();</div><div class="line">object.a=<span class="number">10</span>;</div><div class="line">object.b=<span class="number">1.0f</span>;</div><div class="line">object.c=<span class="keyword">true</span>;</div><div class="line"><span class="comment">/*  "."操作符大致表示"...的..."的意思，通过连接"."，可以引用作为域的对象中的域和方法。*/</span></div></pre></td></tr></table></figure>
+<li><p>引用字段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Object object=<span class="keyword">new</span> Object();</div><div class="line">object.a=<span class="number">10</span>;</div><div class="line">object.b=<span class="number">1.0f</span>;</div><div class="line">object.c=<span class="keyword">true</span>;</div><div class="line"><span class="comment">/*  "."操作符大致表示"...的..."的意思，通过连接"."，可以引用作为字段的对象中的字段和方法。*/</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>当基本类型的域没被程序初始化时，Java会自动为其赋予一个初始值。</p>
+<li><p>当基本类型的字段没被程序初始化时，Java会自动为其赋予一个初始值。</p>
 </li>
 </ul>
 <table>
@@ -521,7 +521,7 @@
 </tr>
 </tbody>
 </table>
-<p>注意：类中的不为域的变量——<font color="red">本地变量不会被赋予初始值</font>，而是会得到一个不确定的值。<font color="red">程序应该在使用该变量之前初始化该变量</font>，否则Java编译器将会报告错误，说明变量可能未被正确初始化。</p>
+<p>注意：类中的不为字段的变量——<font color="red">本地变量不会被赋予初始值</font>，而是会得到一个不确定的值。<font color="red">程序应该在使用该变量之前初始化该变量</font>，否则Java编译器将会报告错误，说明变量可能未被正确初始化。</p>
 <h4 id="方法，参数，返回值"><a href="#方法，参数，返回值" class="headerlink" title="方法，参数，返回值"></a>方法，参数，返回值</h4><blockquote>
 <p>Methods in Java determine the messages an object can receive. The fundamental parts of a<br>method are the name, the arguments, the return type, and the body. <br><br>在Java中，方法决定了一个对象可以接受什么样的信息。方法的基本组成部分包括方法名，参数表达式，返回值类型和方法主体。</p>
 </blockquote>
@@ -548,22 +548,22 @@
 <p>这样写意为将标准库里的所有类一次性全部导入，省去了一个一个写的麻烦，也是比较常见的导入标准库的方式。</p>
 <h3 id="static-关键字"><a href="#static-关键字" class="headerlink" title="static 关键字"></a>static 关键字</h3><p>有时候，我们的程序会有以下需求：</p>
 <ul>
-<li>类中需要一个域，所有类创建的对象实例中该域共享一片存储空间（即他们的值始终相同）</li>
+<li>类中需要一个字段，所有类创建的对象实例中该字段共享一片存储空间（即他们的值始终相同）</li>
 <li>类中需要一个方法，我们希望这个方法无论该类是否创建了对象实例，都可以被调用。</li>
 </ul>
-<p>这个时候，我们就要使用<strong>static</strong>关键字来定义这样的域和方法。</p>
+<p>这个时候，我们就要使用<strong>static</strong>关键字来定义这样的字段和方法。</p>
 <blockquote>
-<p>When you say something is<br>static, it means that particular field or method is not tied to any particular object instance of<br>that class. So even if you’ve never created an object of that class you can call a static method<br>or access a static field.<br><br>static(静态)意味着该域或方法与类的实例无关，因此你可以在没有创建类的实例的情况下调用静态方法和静态域。</p>
+<p>When you say something is<br>static, it means that particular field or method is not tied to any particular object instance of<br>that class. So even if you’ve never created an object of that class you can call a static method<br>or access a static field.<br><br>static(静态)意味着该字段或方法与类的实例无关，因此你可以在没有创建类的实例的情况下调用静态方法和静态字段。</p>
 </blockquote>
 <ol>
-<li>静态域的定义与使用：</li>
+<li>静态字段的定义与使用：</li>
 </ol>
 <ul>
 <li><p>定义：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticField</span></span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//主函数内</span></div><div class="line">StaticField field1=<span class="keyword">new</span> StaticField();</div><div class="line">StaticField field2=<span class="keyword">new</span> StaticField();</div><div class="line">StaticField.a=<span class="number">50</span>;<span class="comment">//此时由于静态域共享存储空间，field1.a和field2.a的值都将变为50</span></div><div class="line"><span class="comment">//也可以这样调用：field1.a=50; 或 field2.a=50;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//主函数内</span></div><div class="line">StaticField field1=<span class="keyword">new</span> StaticField();</div><div class="line">StaticField field2=<span class="keyword">new</span> StaticField();</div><div class="line">StaticField.a=<span class="number">50</span>;<span class="comment">//此时由于静态字段共享存储空间，field1.a和field2.a的值都将变为50</span></div><div class="line"><span class="comment">//也可以这样调用：field1.a=50; 或 field2.a=50;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <ol>
@@ -574,7 +574,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethod</span></span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a;</div><div class="line">    <span class="comment">/*静态方法只能调用静态变量*/</span></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">aplus</span><span class="params">()</span></span>&#123;</div><div class="line">        a++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//主函数内</span></div><div class="line">StaticMethod Method1=<span class="keyword">new</span> StaticMethod();</div><div class="line">StaticMethod Method2=<span class="keyword">new</span> StaticMethod();</div><div class="line">StaticMethod.a=<span class="number">50</span>;<span class="comment">//此时由于静态域共享存储空间，Method1.a和Method2.a的值都将变为50</span></div><div class="line"><span class="comment">//也可以这样调用：Method1.a=50; 或 Method2.a=50;</span></div><div class="line">StaticMethod.aplus();<span class="comment">//调用静态方法，调用后a的值会变为51</span></div><div class="line"><span class="comment">//也可以这样调用：Method1.aplus(); 或 Method2.aplus();</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//主函数内</span></div><div class="line">StaticMethod Method1=<span class="keyword">new</span> StaticMethod();</div><div class="line">StaticMethod Method2=<span class="keyword">new</span> StaticMethod();</div><div class="line">StaticMethod.a=<span class="number">50</span>;<span class="comment">//此时由于静态字段共享存储空间，Method1.a和Method2.a的值都将变为50</span></div><div class="line"><span class="comment">//也可以这样调用：Method1.a=50; 或 Method2.a=50;</span></div><div class="line">StaticMethod.aplus();<span class="comment">//调用静态方法，调用后a的值会变为51</span></div><div class="line"><span class="comment">//也可以这样调用：Method1.aplus(); 或 Method2.aplus();</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="编译并运行Java程序"><a href="#编译并运行Java程序" class="headerlink" title="编译并运行Java程序"></a>编译并运行Java程序</h2><p>需首先下载安装JDK</p>
@@ -634,6 +634,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/30/java2/" rel="prev" title="Operators And Controlling Execution:运算符与流程控制">
+                Operators And Controlling Execution:运算符与流程控制 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -705,7 +709,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -753,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java与面向对象"><span class="nav-number">1.</span> <span class="nav-text">Java与面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用-Reference"><span class="nav-number">2.</span> <span class="nav-text">引用(Reference)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java对象的创建"><span class="nav-number">3.</span> <span class="nav-text">Java对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型-primative-types"><span class="nav-number">3.1.</span> <span class="nav-text">基本类型(primative types)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型及其包装类-wrapper-classes"><span class="nav-number">3.2.</span> <span class="nav-text">基本类型及其包装类(wrapper classes)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高精度数"><span class="nav-number">3.3.</span> <span class="nav-text">高精度数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-中的数组"><span class="nav-number">3.4.</span> <span class="nav-text">Java 中的数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的作用域与自动垃圾回收机制"><span class="nav-number">4.</span> <span class="nav-text">Java的作用域与自动垃圾回收机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型的作用域"><span class="nav-number">4.1.</span> <span class="nav-text">基本类型的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的作用域和Java垃圾回收机制"><span class="nav-number">4.2.</span> <span class="nav-text">对象的作用域和Java垃圾回收机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类：创建全新数据类型的方式"><span class="nav-number">5.</span> <span class="nav-text">类：创建全新数据类型的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据成员和成员方法"><span class="nav-number">5.1.</span> <span class="nav-text">数据成员和成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#域-数据成员"><span class="nav-number">5.1.1.</span> <span class="nav-text">域(数据成员)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法，参数，返回值"><span class="nav-number">5.1.2.</span> <span class="nav-text">方法，参数，返回值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建Java程序"><span class="nav-number">6.</span> <span class="nav-text">构建Java程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名称可见性"><span class="nav-number">6.1.</span> <span class="nav-text">名称可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用非本地组件"><span class="nav-number">6.2.</span> <span class="nav-text">使用非本地组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Java自带的标准库"><span class="nav-number">6.3.</span> <span class="nav-text">使用Java自带的标准库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-关键字"><span class="nav-number">6.4.</span> <span class="nav-text">static 关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译并运行Java程序"><span class="nav-number">7.</span> <span class="nav-text">编译并运行Java程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手工编译与运行"><span class="nav-number">7.1.</span> <span class="nav-text">手工编译与运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用批处理"><span class="nav-number">7.2.</span> <span class="nav-text">使用批处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java与面向对象"><span class="nav-number">1.</span> <span class="nav-text">Java与面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用-Reference"><span class="nav-number">2.</span> <span class="nav-text">引用(Reference)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java对象的创建"><span class="nav-number">3.</span> <span class="nav-text">Java对象的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型-primative-types"><span class="nav-number">3.1.</span> <span class="nav-text">基本类型(primative types)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型及其包装类-wrapper-classes"><span class="nav-number">3.2.</span> <span class="nav-text">基本类型及其包装类(wrapper classes)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高精度数"><span class="nav-number">3.3.</span> <span class="nav-text">高精度数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-中的数组"><span class="nav-number">3.4.</span> <span class="nav-text">Java 中的数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的作用域与自动垃圾回收机制"><span class="nav-number">4.</span> <span class="nav-text">Java的作用域与自动垃圾回收机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型的作用域"><span class="nav-number">4.1.</span> <span class="nav-text">基本类型的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的作用域和Java垃圾回收机制"><span class="nav-number">4.2.</span> <span class="nav-text">对象的作用域和Java垃圾回收机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类：创建全新数据类型的方式"><span class="nav-number">5.</span> <span class="nav-text">类：创建全新数据类型的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据成员和成员方法"><span class="nav-number">5.1.</span> <span class="nav-text">数据成员和成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字段-数据成员"><span class="nav-number">5.1.1.</span> <span class="nav-text">字段(数据成员)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法，参数，返回值"><span class="nav-number">5.1.2.</span> <span class="nav-text">方法，参数，返回值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建Java程序"><span class="nav-number">6.</span> <span class="nav-text">构建Java程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名称可见性"><span class="nav-number">6.1.</span> <span class="nav-text">名称可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用非本地组件"><span class="nav-number">6.2.</span> <span class="nav-text">使用非本地组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Java自带的标准库"><span class="nav-number">6.3.</span> <span class="nav-text">使用Java自带的标准库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-关键字"><span class="nav-number">6.4.</span> <span class="nav-text">static 关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译并运行Java程序"><span class="nav-number">7.</span> <span class="nav-text">编译并运行Java程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手工编译与运行"><span class="nav-number">7.1.</span> <span class="nav-text">手工编译与运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用批处理"><span class="nav-number">7.2.</span> <span class="nav-text">使用批处理</span></a></li></ol></li></ol></div>
             
 
           </div>

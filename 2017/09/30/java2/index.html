@@ -1,0 +1,865 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="由于Java继承自C，因此Java的运算符与控制结构都与C有异曲同工之处。下面就分两部分简单介绍Java的运算符和流程控制。 运算符运算符以一个或多个自变量为基础，可生成一个新值。除此以外，一个运算符可改变运算对象的值。几乎所有运算符都只能操作基本类型。唯一的例外是”=”，”==”和”!=”，它们能操作所有对象。除此以外， String 类支持”+”和”+=”。 优先级运算符的优先级决定了存在多个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Operators And Controlling Execution:运算符与流程控制">
+<meta property="og:url" content="http://yoursite.com/2017/09/30/java2/index.html">
+<meta property="og:site_name" content="黄泽安的Github博客">
+<meta property="og:description" content="由于Java继承自C，因此Java的运算符与控制结构都与C有异曲同工之处。下面就分两部分简单介绍Java的运算符和流程控制。 运算符运算符以一个或多个自变量为基础，可生成一个新值。除此以外，一个运算符可改变运算对象的值。几乎所有运算符都只能操作基本类型。唯一的例外是”=”，”==”和”!=”，它们能操作所有对象。除此以外， String 类支持”+”和”+=”。 优先级运算符的优先级决定了存在多个">
+<meta property="og:updated_time" content="2017-10-03T03:45:54.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Operators And Controlling Execution:运算符与流程控制">
+<meta name="twitter:description" content="由于Java继承自C，因此Java的运算符与控制结构都与C有异曲同工之处。下面就分两部分简单介绍Java的运算符和流程控制。 运算符运算符以一个或多个自变量为基础，可生成一个新值。除此以外，一个运算符可改变运算对象的值。几乎所有运算符都只能操作基本类型。唯一的例外是”=”，”==”和”!=”，它们能操作所有对象。除此以外， String 类支持”+”和”+=”。 优先级运算符的优先级决定了存在多个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/30/java2/"/>
+
+
+
+
+
+  <title>Operators And Controlling Execution:运算符与流程控制 | 黄泽安的Github博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄泽安的Github博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/30/java2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄泽安">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄泽安的Github博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Operators And Controlling Execution:运算符与流程控制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-30T21:22:29+08:00">
+                2017-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于Java继承自C，因此Java的运算符与控制结构都与C有异曲同工之处。下面就分两部分简单介绍Java的运算符和流程控制。</p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><p>运算符以一个或多个自变量为基础，可生成一个新值。除此以外，一个运算符可改变运算对象的值。几乎所有运算符都只能操作基本类型。唯一的例外是”=”，”==”和”!=”，它们能操作所有对象。除此以外， String 类支持”+”和”+=”。</p>
+<h2 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h2><p>运算符的优先级决定了存在多个运算符时一个表达式各部分的计算顺序。除了先乘除后加减这类顺序以外其他的都很容易忘记，所以我们最好用括号明确计算顺序。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">A=<span class="number">1</span>+<span class="number">2</span>/<span class="number">2</span>-<span class="number">3</span>;<span class="comment">//A结果为-1</span></div><div class="line">A=(<span class="number">1</span>+<span class="number">2</span>)/(<span class="number">2</span>-<span class="number">3</span>);<span class="comment">//A结果为-3</span></div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><p>赋值是用等号运算符(=)进行的。它的意思是“取得右边的值，把它复制到左边”。右边的值可以是任何常数、变量或者表达式，但左边的值必须是一个明确的、已命名的变量。例如可将一个常数赋给一个变量(A=4)，但不可将任何东西赋给一个常数(不能4=A)。</p>
+<p>基本类型的赋值单纯地将值从一个地方复制到另一个地方，而对对象的赋值则没有这么简单。由于对象创建的实例传递时使用的是引用，因此例如将D赋值到C(C=D)会将D所持有的引用复制到C，换言之C，D都指向了原来只有D指向的对象。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Assignment</span></span>&#123; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123; </div><div class="line">        <span class="comment">//main program here... </span></div><div class="line">        Tank t1=<span class="keyword">new</span> Tank();</div><div class="line">        Tank t2=<span class="keyword">new</span> Tank();</div><div class="line">        t1.level=<span class="number">9</span>;</div><div class="line">        t2.level=<span class="number">42</span>;</div><div class="line">        Print(<span class="number">1</span>,t1,t2);</div><div class="line">        t1=t2;<span class="comment">//这个语句会使t1,t2的引用都指向同一个对象</span></div><div class="line">        Print(<span class="number">2</span>,t1,t2);</div><div class="line">        t1.level=<span class="number">27</span>;<span class="comment">//t1,t2的引用都指向同一个对象，他们的level都会变为27</span></div><div class="line">        Print(<span class="number">3</span>,t1,t2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Print</span><span class="params">(<span class="keyword">int</span> No,Tank t1,Tank t2)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(No+<span class="string">":"</span>+<span class="string">" t1.level:"</span>+t1.level+<span class="string">" t2.level:"</span>+t2.level);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tank</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> level;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 输出：</span></div><div class="line"><span class="comment">// 1: t1.level:9 t2.level:42</span></div><div class="line"><span class="comment">// 2: t1.level:42 t2.level:42</span></div><div class="line"><span class="comment">// 3: t1.level:27 t2.level:27</span></div></pre></td></tr></table></figure></p>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>Java的基本算术运算符与其他大多数程序设计语言是相同的。其中包括加号（+）、减号（-）、除号（/）、乘号（*）以及取模（%）。Java 也用一种简写形式进行运算，并同时进行赋值操作。这是由等号前的一个运算符标记的，而且对于语言中的所有运算符都是固定的。例如，为了4加到变量x，并将结果赋给x，可用：x+=4。</p>
+<h2 id="自动递增与递减"><a href="#自动递增与递减" class="headerlink" title="自动递增与递减"></a>自动递增与递减</h2><p>与C相同的是，Java提供简便的运算符。最经典的莫过于自动递增与递减运算符。”++”与”–”分别代表“增加一个单位”和“减少一个单位”。另外，当他们作为变量的前缀，例如”++x”时，代表先执行运算，再生成值，即先加后赋值；作为后缀的时候则相反，先赋值，再执行运算。</p>
+<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p>关系运算符常运用于比较两个运算对象。关系运算符包括小于（&lt;）、大于（&gt;）、小于等于（&lt;=）、大于或等于（&gt;=）、等于（==）以及不等于（!=）。等于和不等于适用于所有内建的数据类型，但其他比较不适用于 boolean 类型。</p>
+<h3 id="检查运算对象是否相等"><a href="#检查运算对象是否相等" class="headerlink" title="检查运算对象是否相等"></a>检查运算对象是否相等</h3><h4 id="“-”和”-”"><a href="#“-”和”-”" class="headerlink" title="“==”和”!=”"></a>“==”和”!=”</h4><p>“==”和”!=”如果作用在了两个对象的引用上，那么它将会<strong>比较</strong>两个<strong>引用</strong>是否相同，即是否指向同一个对象实例。因此如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">2</span>);</div><div class="line">Integer b = <span class="keyword">new</span> Integer(<span class="number">2</span>);</div><div class="line">System.out.println(a==b);</div><div class="line">System.out.println(a!=b);</div></pre></td></tr></table></figure></p>
+<p>前者会输出false，而后者会输出true。</p>
+<h4 id="equals-方法"><a href="#equals-方法" class="headerlink" title="equals()方法"></a>equals()方法</h4><p>如果要比较对象之间的关系的话，我们应该使用对象的equals()方法。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">2</span>);</div><div class="line">Integer b = <span class="keyword">new</span> Integer(<span class="number">2</span>);</div><div class="line">System.out.println(a.equals(b));</div></pre></td></tr></table></figure></p>
+<p>结果会输出true。</p>
+<p>但是注意：equals()方法的默认行为是比较引用，因此如果是自己新建的类必须重写equals()方法（将在之后章节提到如何重写）。</p>
+<p>大多数Java标准类都实现了equals()方法，所以它们实际比较的是对象的内容，而非它们的引用。</p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>逻辑运算符 与（&amp;&amp;）、 或（||）以及 非（!）能生成一个布尔值（true或 false）。与在C及C++中不同，Java中不可将一个非布尔值当作布尔值在逻辑表达式中使用。运算结果与运算对象关系参见下表（1代表true，0代表false）：</p>
+<h3 id="与（-amp-amp-）"><a href="#与（-amp-amp-）" class="headerlink" title="与（&amp;&amp;）"></a>与（&amp;&amp;）</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">运算对象1</th>
+<th style="text-align:center">运算对象2</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="或（-）"><a href="#或（-）" class="headerlink" title="或（||）"></a>或（||）</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">运算对象1</th>
+<th style="text-align:center">运算对象2</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="非（-）"><a href="#非（-）" class="headerlink" title="非（!）"></a>非（!）</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">运算对象</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="逻辑运算符的短路现象"><a href="#逻辑运算符的短路现象" class="headerlink" title="逻辑运算符的短路现象"></a>逻辑运算符的短路现象</h3><p>操作逻辑运算符时，我们会遇到一种名为“短路”的情况，即一个逻辑表达式的所有部分都有可能不进行求值。这种现象的原因理解起来很容易。观察与和非的真值表不难发现，与运算当有一个运算对象为flase结果必为false，或运算有一个运算对象为true结果必为true，因此，当程序按顺序执行逻辑运算时，如果遇到这种情况时会自动停止求值来提高效率。例如如下程序：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShortCircuit</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test1</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"test1("</span> + val + <span class="string">")"</span>);</div><div class="line">        System.out.println(<span class="string">"result: "</span> + (val &lt; <span class="number">1</span>));</div><div class="line">        <span class="keyword">return</span> val &lt; <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test2</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"test2("</span> + val + <span class="string">")"</span>);</div><div class="line">        System.out.println(<span class="string">"result: "</span> + (val &lt; <span class="number">2</span>));</div><div class="line">        <span class="keyword">return</span> val &lt; <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test3</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"test3("</span> + val + <span class="string">")"</span>);</div><div class="line">        System.out.println(<span class="string">"result: "</span> + (val &lt; <span class="number">3</span>));</div><div class="line">        <span class="keyword">return</span> val &lt; <span class="number">3</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> b = test1(<span class="number">0</span>) &amp;&amp; test2(<span class="number">2</span>) &amp;&amp; test3(<span class="number">2</span>);</div><div class="line">        System.out.println(<span class="string">"expression is "</span> + b);</div><div class="line">    &#125;</div><div class="line">&#125; </div><div class="line"><span class="comment">// 输出:</span></div><div class="line"><span class="comment">//test1(0)</span></div><div class="line"><span class="comment">//result: true</span></div><div class="line"><span class="comment">//test2(2)</span></div><div class="line"><span class="comment">//result: false</span></div><div class="line"><span class="comment">//expression is false</span></div></pre></td></tr></table></figure></p>
+<p>会产生如上输出的原因就是逻辑短路：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test1(<span class="number">0</span>) &amp;&amp; test2(<span class="number">2</span>) &amp;&amp; test3(<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>其中test1(0)返回true，不能肯定结果，所以继续运行；test2(2)返回false，这时可以断言该表达式必定为false，因此test3(2)被“短路”，没有执行。</p>
+<h2 id="文字常量（Literals）"><a href="#文字常量（Literals）" class="headerlink" title="文字常量（Literals）"></a>文字常量（Literals）</h2><p>通常情况下，当你在程序中加入一个文字常量(即如1,”abc”等输入在程序中的字符)，Java编译器会自动确定这个常量是什么类型的。然而有时候可能无法确定类型，需要我们通过在文字常量中加入一些标识符来帮助编译器确定。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Literals</span> </span>&#123;</div><div class="line"><span class="keyword">char</span> c = <span class="number">0xffff</span>; <span class="comment">// char最大值对应的十六进制</span></div><div class="line"><span class="keyword">byte</span> b = <span class="number">0x7f</span>; <span class="comment">// byte最大值对应的十六进制</span></div><div class="line"><span class="keyword">short</span> s = <span class="number">0x7fff</span>; <span class="comment">// short最大值对应的十六进制</span></div><div class="line"><span class="keyword">int</span> i1 = <span class="number">0x2f</span>; <span class="comment">// 十六进制 (小写)</span></div><div class="line"><span class="keyword">int</span> i2 = <span class="number">0X2F</span>; <span class="comment">// 十六进制 (大写)</span></div><div class="line"><span class="keyword">int</span> i3 = <span class="number">0177</span>; <span class="comment">// 八进制 (前导0)</span></div><div class="line"><span class="comment">//十六进制和八进制对long也适用</span></div><div class="line"><span class="keyword">long</span> n1 = <span class="number">200L</span>; <span class="comment">// long 后缀</span></div><div class="line"><span class="keyword">long</span> n2 = <span class="number">200l</span>; <span class="comment">// long 后缀，但是很像数字1，容易引起误解，最好大写</span></div><div class="line"><span class="keyword">long</span> n3 = <span class="number">200</span>;</div><div class="line"><span class="keyword">float</span> f1 = <span class="number">1</span>;</div><div class="line"><span class="keyword">float</span> f2 = <span class="number">1F</span>; <span class="comment">// 浮点数后缀</span></div><div class="line"><span class="keyword">float</span> f3 = <span class="number">1f</span>; <span class="comment">// 浮点数后缀</span></div><div class="line"><span class="keyword">double</span> d1 = <span class="number">1</span>d; <span class="comment">// 双精度浮点数后缀</span></div><div class="line"><span class="keyword">double</span> d2 = <span class="number">1</span>D; <span class="comment">// 双精度浮点数后缀</span></div></pre></td></tr></table></figure></p>
+<ul>
+<li>显示数的二进制形式可以使用基本类型的包装类的静态方法toBinaryString()来实现。</li>
+</ul>
+<h2 id="指数标识符"><a href="#指数标识符" class="headerlink" title="指数标识符"></a>指数标识符</h2><p>e用在数的标识中表示指数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> a = <span class="number">1e-45</span>;<span class="comment">//代表1*10^-45</span></div></pre></td></tr></table></figure></p>
+<h2 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a>按位运算符</h2><p>按位运算符允许我们操作一个整数的基本类型中的单个二进制位。按位运算符会对两个自变量中对应的位执行布尔代数，并最终生成一个结果。</p>
+<ul>
+<li>按位与（&amp;），按位或（|），按位非（~）符合逻辑运算的真值表。</li>
+<li>按位异或(^)当两个运算对象相等在该位生成0，否则生成1。</li>
+<li>按位运算符可与等号（=）联合使用，以便合并运算及赋值：&amp;=，|=和^=都是合法的（由于~是一元运算符，所以不可与=联合使用）。</li>
+<li>布尔型（boolean）由于只有一位，因此比较特殊。为了不和逻辑非相混淆，不能对布尔型执行按位非，但是其他的按位运算符均可执行，而且不会有逻辑短路的情况发生。另外，在下面一节使用移位运算符的时候不能使用布尔型。</li>
+</ul>
+<h2 id="移位运算符"><a href="#移位运算符" class="headerlink" title="移位运算符"></a>移位运算符</h2><p>移位运算符面向的运算对象也是二进制的位。可用它们来处理整数类型。</p>
+<ul>
+<li><strong>左移位运算符（&lt;&lt;）</strong>将运算符左边的运算对象向左移动运算符右侧指定的位数（在低位补 0）。</li>
+<li><strong>有符号右移位运算符（&gt;&gt;）</strong>将运算符左边的运算对象向右移动运算符右侧指定的位数。“有符号”右移位运算符使用了“符号扩展”：若值为正，则在高位插入0；若值为负，则在高位插入1。 </li>
+<li><strong>无符号右移位运算符（&gt;&gt;&gt;）</strong>将运算符左边的运算对象向右移动运算符右侧指定的位数。它使用了“零扩展”：无论正负，都在高位插入0。</li>
+</ul>
+<p>若对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。对于int，移位数不能大于32位（否则全移动完就没有意义了），因此操作符右侧数只有低5位有效。若对一个long进行处理，最后得到的结果也是long，同理此时只会用到操作符右侧数的6个低位（移动64位）。</p>
+<p>移位可与等号（&lt;&lt;=或&gt;&gt;=或&gt;&gt;&gt;=）组合使用。此时，运算符左边的值会移动由右边的值指定的位数，再将得到的结果赋回左边的值。</p>
+<p>当移位运算符与等号组合使用时，移动char，byte，short会出现问题。它们被转化为int移位完后却在转回原来类型的时候损失了信息，因此这样使用会使移位结果变为-1。</p>
+<h2 id="三元if-else运算符"><a href="#三元if-else运算符" class="headerlink" title="三元if-else运算符"></a>三元if-else运算符</h2><p>三元if-else运算符是一种比较少见的拥有三个运算对象的运算符。功能和if-else语句基本类似，但不同点在于它会产生一个运算结果。<br>基本使用举例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TernaryIfElse</span> </span>&#123;</div><div class="line">    <span class="comment">/*三元if-else运算符*/</span></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">ternary</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> i &lt; <span class="number">10</span> ? i * <span class="number">100</span> : i * <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/*标准的IF-ELSE语句*/</span></div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">standardIfElse</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(i &lt; <span class="number">10</span>)</div><div class="line">        <span class="keyword">return</span> i * <span class="number">100</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        <span class="keyword">return</span> i * <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        print(ternary(<span class="number">9</span>));</div><div class="line">        print(ternary(<span class="number">10</span>));</div><div class="line">        print(standardIfElse(<span class="number">9</span>));</div><div class="line">        print(standardIfElse(<span class="number">10</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//900</span></div><div class="line"><span class="comment">//100</span></div><div class="line"><span class="comment">//900</span></div><div class="line"><span class="comment">//100</span></div></pre></td></tr></table></figure></p>
+<p>可见，三元运算符比起标准if-else语句更加简洁，效率更高，但是降低了代码的易读性。因此我们应该适度使用三元运算符而不是滥用。</p>
+<h2 id="字符串运算符-和"><a href="#字符串运算符-和" class="headerlink" title="字符串运算符+和+="></a>字符串运算符+和+=</h2><p>字符串运算符很简单，“+”用来连接两个字符串，“+=”为简写方式，用法和以上所有的与等号组合使用的运算符一样。只有一个简单的问题需要说明：字符串运算符会试图将非字符串类型用字符串表示。如布尔值会被转为true和false，int，long等会被转换为对应的字符串。因此如下情况会发生：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> x=<span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> y=<span class="number">2</span>;</div><div class="line"><span class="keyword">int</span> z=<span class="number">3</span>;</div><div class="line">String s=<span class="string">""</span>;</div><div class="line">s+=<span class="string">"sum:"</span>;</div><div class="line">System.out.println(s+x+y+z);</div><div class="line">s+=(x+y+z);</div><div class="line">System.out.println(s);</div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//sum:123</span></div><div class="line"><span class="comment">//sum:6</span></div></pre></td></tr></table></figure></p>
+<h2 id="强制转换运算符"><a href="#强制转换运算符" class="headerlink" title="强制转换运算符"></a>强制转换运算符</h2><p>在适当的时候，Java会将一种数据类型自动转换成另一种。例如，假设我们为浮点变量分配一个整数值，计算机会将int自动转换成float。通过强制转换，我们可明确设置这种类型的转换，或者在一般没有可能进行的时候强迫它进行。</p>
+<p>为进行一次强制转换，要将括号中希望的数据类型（包括所有修改符）置于其他任何值的左侧。下面是一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">200</span>;</div><div class="line"><span class="keyword">long</span> l = (<span class="keyword">long</span>)i;</div><div class="line"><span class="keyword">long</span> l2 = (<span class="keyword">long</span>)<span class="number">200</span>;</div></pre></td></tr></table></figure></p>
+<p>在 C 和 C++中，强制转换有时会让人头痛。在 Java 里，强制转换则是一种比较安全的操作。但是，若进行一种名为“缩小转换”的操作（也就是说，脚本是能容纳更多信息的数据类型，将其转换成容量较小的类型），此时就可能面临信息丢失的危险。此时，编译器会强迫我们进行强制转换。而对于“放大转换”，则不必进行强制转换，因为新类型肯定能容纳原来类型的信息，不会造成任何信息的丢失。</p>
+<p>Java 允许我们将任何主类型“强制转换为其他任何一种主类型，但布尔值（bollean）要除外，后者根本不允许进行任何强制转换。“类”不允许进行强制转换。为了将一种类转换成另一种，必须采用特殊的方法，在之后的章节中我们会提到。</p>
+<h3 id="截断和估算"><a href="#截断和估算" class="headerlink" title="截断和估算"></a>截断和估算</h3><p>在使用强制类型转换的时候，特别是在“缩小转换”的时候要注意截断和估算的问题。例如，如果你想要将一个浮点数类型（float）转化为一个整数型（int），会发生什么？我们举例说明：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CastingNumbers</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">double</span> above = <span class="number">0.7</span>, below = <span class="number">0.4</span>;</div><div class="line">        <span class="keyword">float</span> fabove = <span class="number">0.7f</span>, fbelow = <span class="number">0.4f</span>;</div><div class="line">        System.out.println(<span class="string">"(int)above: "</span> + (<span class="keyword">int</span>)above);</div><div class="line">        System.out.println(<span class="string">"(int)below: "</span> + (<span class="keyword">int</span>)below);</div><div class="line">        System.out.println(<span class="string">"(int)fabove: "</span> + (<span class="keyword">int</span>)fabove);</div><div class="line">        System.out.println(<span class="string">"(int)fbelow: "</span> + (<span class="keyword">int</span>)fbelow);</div><div class="line">    &#125;</div><div class="line">&#125; </div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//(int)above: 0</span></div><div class="line"><span class="comment">//(int)below: 0</span></div><div class="line"><span class="comment">//(int)fabove: 0</span></div><div class="line"><span class="comment">//(int)fbelow: 0</span></div></pre></td></tr></table></figure></p>
+<p>结论是它们总会被截断，而不会取估算值。如果<strong>需要一个数的估算值，应该使用round()方法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoundingNumbers</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">double</span> above = <span class="number">0.7</span>, below = <span class="number">0.4</span>;</div><div class="line">        <span class="keyword">float</span> fabove = <span class="number">0.7f</span>, fbelow = <span class="number">0.4f</span>;</div><div class="line">        print(<span class="string">"Math.round(above): "</span> + Math.round(above));</div><div class="line">        print(<span class="string">"Math.round(below): "</span> + Math.round(below));</div><div class="line">        print(<span class="string">"Math.round(fabove): "</span> + Math.round(fabove));</div><div class="line">        print(<span class="string">"Math.round(fbelow): "</span> + Math.round(fbelow));</div><div class="line">    &#125;</div><div class="line">&#125; </div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//Math.round(above): 1</span></div><div class="line"><span class="comment">//Math.round(below): 0</span></div><div class="line"><span class="comment">//Math.round(fabove): 1</span></div><div class="line"><span class="comment">//Math.round(fbelow): 0</span></div></pre></td></tr></table></figure>
+<h3 id="转型"><a href="#转型" class="headerlink" title="转型"></a>转型</h3><p>假若对基本类型执行任何算术或按位运算，只要它们“比int小”（即char，byte或者short），那么在正式执行运算之前，那些值会自动转换成int。这样一来，最终生成的值就是int。所以<strong>只要把一个值赋回较小的类型，就必须使用强制类型转换</strong>。</p>
+<p>此外，由于是将值赋回给较小的类型，所以可能出现信息丢失的情况）。通常，<strong>表达式中最大的数据类型是决定了表达式最终结果大小的那个类型</strong>。若将一个<br>float值与一个double值相乘，结果就是double；如将一个int和一个long值相加，则结果为long。</p>
+<h2 id="Java没有sizeof"><a href="#Java没有sizeof" class="headerlink" title="Java没有sizeof()"></a>Java没有sizeof()</h2><p>在 C 和 C++中， sizeof()运算符能满足我们的一项特殊需要： 获知为数据项目分配的字节数量。在C和C++中，sizeof()最常见的一种应用就是“移植”。不同的数据在不同的机器上可能有不同的大小，所以在进行一些对大小敏感的运算时，程序员必须对那些类型有多大做到心中有数。例如，一台计算机可用32位来保存整数，而另一台只用16位保存。显然，在第一台机器中，程序可保存更大的值。移植是令C和 C++程序员颇为头痛的一个问题。</p>
+<p>Java 不需要 sizeof() 运算符来满足这方面的需要，因为<strong>所有数据类型在所有机器的大小都是相同的</strong>。我们不必考虑移植问题——<strong>Java本身就是一种“与平台无关”的语言</strong>。</p>
+<h1 id="执行控制"><a href="#执行控制" class="headerlink" title="执行控制"></a>执行控制</h1><h2 id="判断语句"><a href="#判断语句" class="headerlink" title="判断语句"></a>判断语句</h2><h3 id="if-else语句"><a href="#if-else语句" class="headerlink" title="if-else语句"></a>if-else语句</h3><p>if-else语句是控制程序流程最基本的形式。其中的 else 是可选的，所以可按下述两种形式来使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(布尔表达式)</div><div class="line">语句</div><div class="line"></div><div class="line"><span class="comment">//或者</span></div><div class="line"></div><div class="line"><span class="keyword">if</span>(布尔表达式)</div><div class="line">语句</div><div class="line"><span class="keyword">else</span></div><div class="line">语句</div></pre></td></tr></table></figure></p>
+<p>条件必须产生一个布尔结果。“语句”要么是用分号结尾的一个简单语句，要么是一个复合语句——封闭在大括号（{}）内的一组简单语句。</p>
+<h3 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h3><p>switch有时被叫做选择语句，它可以依据一个整数表达式的值来选择不同的代码片段执行。举例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span>(整形表达式) &#123;</div><div class="line">    <span class="keyword">case</span> 值<span class="number">1</span> : statement; <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> 值<span class="number">2</span> : statement; <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> 值<span class="number">3</span> : statement; <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> 值<span class="number">4</span> : statement; <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> 值<span class="number">5</span> : statement; <span class="keyword">break</span>;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    <span class="keyword">default</span>: statement;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>整形表达式是一个能够产生整形值的的表达式（应该是int或者char等，而不是string或浮点数）。switch语句判断整形表达式产生的整数是否与任意一个case中都值相符。如果是，那么执行case中的语句。否则执行default（若有）中的语句。下一章我们会讲到enum这个特性，它也十分适合作为switch语句的整形表达式。</li>
+<li>case语句末尾的break是可选的。如果没有break，那么将会继续执行下一个case语句直至遇到break语句。</li>
+</ul>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>while， do-while 和 for 控制着循环，有时将其划分为“反复语句”。除非用于控制反复的布尔表达式得到“假”的结果，否则语句会重复执行下去。</p>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(布尔表达式)</div><div class="line">语句</div></pre></td></tr></table></figure>
+<p>在循环刚开始时，会计算一次“布尔表达式”的值。而对于后来每一次额外的循环，都会在开始前重新计算一次。</p>
+<h3 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do-while循环"></a>do-while循环</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span></div><div class="line">语句</div><div class="line"><span class="keyword">while</span>(布尔表达式)</div></pre></td></tr></table></figure>
+<p>while 和 do-while 唯一的区别就是 do-while 肯定会至少执行一次，即便表达式第一次便计算为 false。而在 while 循环结构中，若条件第一次就为 false，那么其中的语句根本不会执行。在实际应用中， while 比 do-while 更常用一些。</p>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>for 循环在第一次反复之前要进行初始化。随后，它会进行条件测试，而且在每一次反复的时候，进行某种形式的“步进”（Stepping）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(初始表达式; 布尔表达式; 步进)</div><div class="line">语句</div></pre></td></tr></table></figure></p>
+<p>无论初始表达式，布尔表达式，还是步进，都可以置空。每次反复前，都要测试一下布尔表达式。若获得的结果是false，就会继续执行紧跟在for语句后面的那行代码。在每次循环的末尾，会计算一次步进。for循环通常用于执行“计数”任务：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListCharacters</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">char</span> c = <span class="number">0</span>; c &lt; <span class="number">128</span>; c++)</div><div class="line">        <span class="keyword">if</span> (c != <span class="number">26</span> ) <span class="comment">// ANSI Clear screen</span></div><div class="line">        System.out.println(<span class="string">"value:"</span> + (<span class="keyword">int</span>)c +<span class="string">" character:"</span> + c);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>for语句里定义的变量的作用域是由for控制的表达式。</li>
+<li><p>可在for语句里定义多个变量，但它们必须具有同样的类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">1</span>;i &lt; <span class="number">10</span> &amp;&amp; j != <span class="number">11</span>;i++, j++)</div><div class="line"><span class="comment">//循环体</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>for语句括号中的表达式如有多个定义，则用逗号运算符隔开，而且是顺序执行的。</p>
+</li>
+</ul>
+<h3 id="for循环的另外一种形式：Foreach"><a href="#for循环的另外一种形式：Foreach" class="headerlink" title="for循环的另外一种形式：Foreach"></a>for循环的另外一种形式：Foreach</h3><blockquote>
+<p>foreach means that you don’t have to create an int to count through a sequence of items—the foreach produces each item for you, automatically.<br><br>foreach 允许我们不创建一个变量来进行循环计数，而由其自动控制。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForEachFloat</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Random rand = <span class="keyword">new</span> Random(<span class="number">47</span>);</div><div class="line">        <span class="keyword">float</span> f[] = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">10</span>];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)<span class="comment">//普通的for</span></div><div class="line">        f[i] = rand.nextFloat();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">float</span> x : f)<span class="comment">//foreach:for every float x in f</span></div><div class="line">        System.out.println(x);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>任何的数组形式都可以使用foreach形式进行循环遍历。</li>
+<li>foreach同样对之后将会学习的所有配置为Iterable的对象有效。</li>
+</ul>
+<h3 id="return语句：返回"><a href="#return语句：返回" class="headerlink" title="return语句：返回"></a>return语句：返回</h3><p>第一章的笔记曾讲过，return语句完成两件事情：</p>
+<blockquote>
+<p>1.<strong>立即结束方法的执行</strong>(当返回值为void的时候，使用”return;” 可以直接结束方法执行。)<br>2.<strong>将return 后的表达式的值作为返回值返回</strong>；</p>
+</blockquote>
+<p>举一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfElse2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> testval, <span class="keyword">int</span> target)</span> </span>&#123;</div><div class="line">        <span class="comment">//原来的</span></div><div class="line">        <span class="comment">//if(testval &gt; target)</span></div><div class="line">        <span class="comment">//return +1;</span></div><div class="line">        <span class="comment">//else if(testval &lt; target)</span></div><div class="line">        <span class="comment">//return -1;</span></div><div class="line">        <span class="comment">//else</span></div><div class="line">        <span class="comment">//return 0;</span></div><div class="line">        <span class="comment">//简化后</span></div><div class="line">        <span class="keyword">if</span>(testval &gt; target)</div><div class="line">        <span class="keyword">return</span> +<span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span>(testval &lt; target)</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>; </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        System.out.println(test(<span class="number">10</span>, <span class="number">5</span>));</div><div class="line">        System.out.println(test(<span class="number">5</span>, <span class="number">10</span>));</div><div class="line">        System.out.println(test(<span class="number">5</span>, <span class="number">5</span>));</div><div class="line">    &#125;</div><div class="line">&#125; </div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//1</span></div><div class="line"><span class="comment">//-1</span></div><div class="line"><span class="comment">//0</span></div></pre></td></tr></table></figure></p>
+<p>可见，在方法中，我们有时候可以用return来简化if-else语句。</p>
+<h3 id="break语句和continue语句：中断和继续"><a href="#break语句和continue语句：中断和继续" class="headerlink" title="break语句和continue语句：中断和继续"></a>break语句和continue语句：中断和继续</h3><p>在任何循环语句的主体部分，我们可以用 break 和 continue 控制循环的流程。其中， break 用于强行退出循环，不执行循环中剩余的语句。而continue 则停止执行当前的反复，然后退回循环起始和，开始新的反复。下面这个程序展示了 break 和 continue 在 for 和 while 循环中的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BreakAndContinue</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</div><div class="line">            <span class="keyword">if</span>(i == <span class="number">74</span>) <span class="keyword">break</span>; <span class="comment">// 退出循环</span></div><div class="line">            <span class="keyword">if</span>(i % <span class="number">9</span> != <span class="number">0</span>) <span class="keyword">continue</span>; <span class="comment">//跳过本次循环，继续判断与执行下一次循环</span></div><div class="line">            System.out.println(i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="comment">//无限循环:</span></div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">            i++;</div><div class="line">            <span class="keyword">int</span> j = i * <span class="number">27</span>;</div><div class="line">            <span class="keyword">if</span>(j == <span class="number">1269</span>) <span class="keyword">break</span>; <span class="comment">// 退出循环</span></div><div class="line">            <span class="keyword">if</span>(i % <span class="number">10</span> != <span class="number">0</span>) <span class="keyword">continue</span>; <span class="comment">// /跳过本次循环，返回顶部继续执行</span></div><div class="line">            System.out.println(i);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这个for循环中，i的值永远不会到达 100。因为一旦 i 到达 74， break 语句就会中断循环。通常，只有在不知道中断条件何时满足时，才需象这样使用 break。只要i不能被 9 整除，continue 语句会使程序流程返回循环的最开头执行（所以使i值递增）。如果能够整除，则将值显示出来。</p>
+<p>第二部分是一个无限循环的情况。然而，循环内部有一个 break 语句，可中止循环。除此以外，continue 移回循环顶部，同时不完成剩余的内容（所以只有在i 值能被9整除时才打印出值）。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/26/java1/" rel="next" title="Everything is an Object:万物皆为对象">
+                <i class="fa fa-chevron-left"></i> Everything is an Object:万物皆为对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="黄泽安" />
+          <p class="site-author-name" itemprop="name">黄泽安</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运算符"><span class="nav-number">1.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优先级"><span class="nav-number">1.1.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#赋值"><span class="nav-number">1.2.</span> <span class="nav-text">赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术运算符"><span class="nav-number">1.3.</span> <span class="nav-text">算术运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动递增与递减"><span class="nav-number">1.4.</span> <span class="nav-text">自动递增与递减</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关系运算符"><span class="nav-number">1.5.</span> <span class="nav-text">关系运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查运算对象是否相等"><span class="nav-number">1.5.1.</span> <span class="nav-text">检查运算对象是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“-”和”-”"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">“==”和”!=”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#equals-方法"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">equals()方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑运算符"><span class="nav-number">1.6.</span> <span class="nav-text">逻辑运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与（-amp-amp-）"><span class="nav-number">1.6.1.</span> <span class="nav-text">与（&&）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#或（-）"><span class="nav-number">1.6.2.</span> <span class="nav-text">或（||）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非（-）"><span class="nav-number">1.6.3.</span> <span class="nav-text">非（!）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑运算符的短路现象"><span class="nav-number">1.6.4.</span> <span class="nav-text">逻辑运算符的短路现象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文字常量（Literals）"><span class="nav-number">1.7.</span> <span class="nav-text">文字常量（Literals）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数标识符"><span class="nav-number">1.8.</span> <span class="nav-text">指数标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按位运算符"><span class="nav-number">1.9.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移位运算符"><span class="nav-number">1.10.</span> <span class="nav-text">移位运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三元if-else运算符"><span class="nav-number">1.11.</span> <span class="nav-text">三元if-else运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串运算符-和"><span class="nav-number">1.12.</span> <span class="nav-text">字符串运算符+和+=</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制转换运算符"><span class="nav-number">1.13.</span> <span class="nav-text">强制转换运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#截断和估算"><span class="nav-number">1.13.1.</span> <span class="nav-text">截断和估算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转型"><span class="nav-number">1.13.2.</span> <span class="nav-text">转型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java没有sizeof"><span class="nav-number">1.14.</span> <span class="nav-text">Java没有sizeof()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行控制"><span class="nav-number">2.</span> <span class="nav-text">执行控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断语句"><span class="nav-number">2.1.</span> <span class="nav-text">判断语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if-else语句"><span class="nav-number">2.1.1.</span> <span class="nav-text">if-else语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch语句"><span class="nav-number">2.1.2.</span> <span class="nav-text">switch语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环语句"><span class="nav-number">2.2.</span> <span class="nav-text">循环语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#while循环"><span class="nav-number">2.2.1.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#do-while循环"><span class="nav-number">2.2.2.</span> <span class="nav-text">do-while循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环"><span class="nav-number">2.2.3.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环的另外一种形式：Foreach"><span class="nav-number">2.2.4.</span> <span class="nav-text">for循环的另外一种形式：Foreach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return语句：返回"><span class="nav-number">2.2.5.</span> <span class="nav-text">return语句：返回</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break语句和continue语句：中断和继续"><span class="nav-number">2.2.6.</span> <span class="nav-text">break语句和continue语句：中断和继续</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄泽安</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
