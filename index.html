@@ -339,11 +339,14 @@
 
       
         
-          
-            <h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2><p>为了让开发者可以做到在改进库的性能和增加功能的同时不影响使用（即不用修改现有代码）并且对外界屏蔽不需要用到的方法和数据成员，Java提供了访问限定符来完成这件工作。访问权限从上至下为<strong>public</strong>（公共的）,<strong>protected</strong>的（受保护的）,包内可见（没有关键字）,<strong>private</strong>（私有的）。为了理解访问权限的意义，我们需要首先理解包的含义，以及库是怎么构成的。</p>
-<p>###</p>
-
-          
+          <h1 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h1><p>为了让开发者可以做到在改进库的性能和增加功能的同时不影响使用（即不用修改现有代码）并且对外界屏蔽不需要用到的方法和数据成员，Java提供了访问限定符来完成这件工作。访问权限从上至下为<strong>public</strong>（公共的）,<strong>protected</strong>的（受保护的）,包内可见（没有关键字）,<strong>private</strong>（私有的）。为了理解访问权限的意义，我们需要首先理解库的组件是如何放到包中的。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/06/java4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -479,7 +482,7 @@
 </em>随着计算机的进步，“不安全”的程序设计已成为造成编程代价高昂的罪魁祸首之一。*</p>
 </blockquote>
 <p>“初始化”和“清理”是这些安全问题的其中两个。许多 C 程序的错误都是由于程序员忘记初始化一个变量造成的。对于现成的库，若用户不知道如何初始化库的一个组件，就往往会出现这一类的错误。清理是另一个特殊的问题，因为用完一个元素后，由于不再关心，所以很容易把它忘记。这样一来，那个元素占用的资源会一直保留下去，极易产生资源（主要是内存）用尽的后果。Java 也使用构造器和垃圾收集器来解决这些问题。</p>
-<h2 id="用构造器来确保初始化"><a href="#用构造器来确保初始化" class="headerlink" title="用构造器来确保初始化"></a>用构造器来确保初始化</h2><ul>
+<h1 id="用构造器来确保初始化"><a href="#用构造器来确保初始化" class="headerlink" title="用构造器来确保初始化"></a>用构造器来确保初始化</h1><ul>
 <li>构造器是一种方法，它将会在对象初始化时自动调用，并且在那之前你无法操作这个对象，这样就确保了对象一定会被初始化。</li>
 <li>构造器的名字和类的名字必须是<strong>完全相同</strong>的。</li>
 </ul>
@@ -769,11 +772,11 @@
 
       
         
-          <h2 id="Java与面向对象"><a href="#Java与面向对象" class="headerlink" title="Java与面向对象"></a>Java与面向对象</h2><blockquote>
+          <h1 id="Java与面向对象"><a href="#Java与面向对象" class="headerlink" title="Java与面向对象"></a>Java与面向对象</h1><blockquote>
 <p>Although it is based on C++, Java is more of a “pure” object-oriented<br>language.<br><br>尽管基于C++，java相较之下更能称之为一种纯粹的面向对象的语言。</p>
 </blockquote>
 <p>由于C++需要对C语言提供向下兼容性，这导致C++包含了许多其自身不期望的特性，这使得C++在某些方面变得过于复杂。然而Java语言确保你所做的完全是面向对象的编程，因此在开始着手于Java的学习之前应该首先将思维完全切换到面向对象的世界中去。</p>
-<h2 id="引用-Reference"><a href="#引用-Reference" class="headerlink" title="引用(Reference)"></a>引用(Reference)</h2><blockquote>
+<h1 id="引用-Reference"><a href="#引用-Reference" class="headerlink" title="引用(Reference)"></a>引用(Reference)</h1><blockquote>
 <p>You treat everything as an object, using a single consistent<br>syntax. Although you treat everything as an object, the identifier you manipulate is actually a<br>“reference” to an object.<br><br>在Java中，所有的东西都应该被看作一个对象，你应该用相同的语法调用他们。也正因为你把这些东西都看作对象，你操作的实际上是这个对象的一个引用。</p>
 <p>You might imagine a television (the object) and a remote control<br>(the reference). As long as you’re holding this reference, you have a connection to the<br>television, but when someone says, “Change the channel” or “Lower the volume,” what you’re<br>manipulating is the reference, which in turn modifies the object. If you want to move around the room and still control the television, you take the remote/reference with you, not the<br>television.<br><br>举个例子，你可以想象一个电视机(对象)和一个遥控器(引用)。你操作引用，如换台和调音量，最终导致对象的改变。每当你想换个地方坐着看电视的时候，你只要拿着遥控器(引用)而不用直接拿着电视机(对象)。</p>
 </blockquote>
