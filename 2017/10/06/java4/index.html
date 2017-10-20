@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/06/java4/index.html">
 <meta property="og:site_name" content="黄泽安的Github博客">
 <meta property="og:description" content="访问控制为了让开发者可以做到在改进库的性能和增加功能的同时不影响使用（即不用修改现有代码）并且对外界屏蔽不需要用到的方法和数据成员，Java提供了访问限定符来完成这件工作。访问权限从上至下为public（公共的）,protected的（受保护的）,包内可见（没有关键字）,private（私有的）。为了理解访问权限的意义，我们需要首先理解库的组件是如何放到包中的。">
-<meta property="og:updated_time" content="2017-10-13T09:55:07.603Z">
+<meta property="og:updated_time" content="2017-10-15T02:31:19.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Access Control:访问控制">
 <meta name="twitter:description" content="访问控制为了让开发者可以做到在改进库的性能和增加功能的同时不影响使用（即不用修改现有代码）并且对外界屏蔽不需要用到的方法和数据成员，Java提供了访问限定符来完成这件工作。访问权限从上至下为public（公共的）,protected的（受保护的）,包内可见（没有关键字）,private（私有的）。为了理解访问权限的意义，我们需要首先理解库的组件是如何放到包中的。">
@@ -348,7 +348,7 @@
 <h3 id="组织代码"><a href="#组织代码" class="headerlink" title="组织代码"></a>组织代码</h3><p>Java源文件编译后会为其中的每个类生成.class文件。Java程序是由这些.class文件构成的，它们可以被打包压缩进JAR文件中。Java翻译器会自动搜索加载这些.class文件。</p>
 <p>库是一些类的组合。每一个源文件都有一个<strong>public</strong>类和一些其他的类，而包包含了它们的所有。<strong>package</strong>关键字必须在文件非注释的首行使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> access.mypackage;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>如果需要使用access.mypackage包内的其他class，需要另外加入import语句。</p>
-<h3 id="创建唯一的包名"><a href="#创建唯一的包名" class="headerlink" title="创建唯一的包名"></a>创建唯一的包名</h3><p>虽然包名可以随意定义，但最好按照java标准定义的那样以个人域名反写作为包名避免冲突（当在网络上传播的时候更应如此）。</p>
+<h3 id="创建唯一的包名"><a href="#创建唯一的包名" class="headerlink" title="创建唯一的包名"></a>创建唯一的包名</h3><p>虽然包名可以随意定义，但最好按照java标准定义的那样以个人域名反写作为包名避免冲突。</p>
 <p>Java编译器会首先在CLASSPATH（系统变量）对应目录下寻找.class文件。编译器将包名中的“.”替换为“/”作为.class文件的路径，并将在CLASSPATH对应目录下查找包名转化成的子目录，并在其中查找.class文件。</p>
 <p>例如，将com.example.test包中的类放在C:\TestClassPath\com\example\test\下，我们需要这样配置CLASSPATH：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CLASSPATH=.;C:\TestClassPath;</div></pre></td></tr></table></figure></p>
 <p>这样编译器就会在C:\TestClassPath\下寻找com\example\test\子目录，并在其中搜索包中包含的.class文件。</p>
@@ -438,6 +438,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/10/13/java5/" rel="prev" title="Reusing Classes:类的重用">
+                Reusing Classes:类的重用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -508,7 +512,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
