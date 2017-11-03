@@ -1,0 +1,745 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="多形性 Polymorphism is the third essential feature of an object-oriented programming language, after data abstraction and inheritance.多形性是除数据抽象以及继承以外第三关键的面向对象编程的特性。  利用具有多形性的方法调用，一种类型可将自己与另一种相似的类型区分开，只要它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Polymorphism:多形性">
+<meta property="og:url" content="http://yoursite.com/2017/10/22/java6/index.html">
+<meta property="og:site_name" content="黄泽安的Github博客">
+<meta property="og:description" content="多形性 Polymorphism is the third essential feature of an object-oriented programming language, after data abstraction and inheritance.多形性是除数据抽象以及继承以外第三关键的面向对象编程的特性。  利用具有多形性的方法调用，一种类型可将自己与另一种相似的类型区分开，只要它">
+<meta property="og:image" content="http://yoursite.com/2017/10/22/java6/java6/6-1.png">
+<meta property="og:updated_time" content="2017-11-03T12:28:29.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Polymorphism:多形性">
+<meta name="twitter:description" content="多形性 Polymorphism is the third essential feature of an object-oriented programming language, after data abstraction and inheritance.多形性是除数据抽象以及继承以外第三关键的面向对象编程的特性。  利用具有多形性的方法调用，一种类型可将自己与另一种相似的类型区分开，只要它">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/22/java6/java6/6-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/22/java6/"/>
+
+
+
+
+
+  <title>Polymorphism:多形性 | 黄泽安的Github博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄泽安的Github博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-java_learn">
+          <a href="/java_learn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            java学习笔记
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/java6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄泽安">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄泽安的Github博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Polymorphism:多形性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T16:21:12+08:00">
+                2017-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="多形性"><a href="#多形性" class="headerlink" title="多形性"></a>多形性</h1><blockquote>
+<p>Polymorphism is the third essential feature of an object-oriented programming language, after data abstraction and inheritance.<br><br>多形性是除数据抽象以及继承以外第三关键的面向对象编程的特性。</p>
+</blockquote>
+<p>利用具有多形性的方法调用，一种类型可将自己与另一种相似的类型区分开，只要它们都是从相同的基础类型中衍生出来的。这种区分是通过各种方法在行为上的差异实现的，可通过基础类实现对那些方法的调用。</p>
+<h2 id="向上造型"><a href="#向上造型" class="headerlink" title="向上造型"></a>向上造型</h2><p>上一章已经提过，向上造型可以使我们传递参数时不仅可以传递基类的对象，还可以传递所有从基类继承的对象，因为它们共享着基类的全部接口方法。通过向上造型，我们可以不用为同一个类型下的不同的具体类分别写不同的调用函数，而是可以直接调用它们的基类，而这也是多形性的主要作用。</p>
+<a id="more"></a>
+<h2 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h2><p>然而编译器并不能区分向上造型前的子类究竟是哪一个，那它是怎么正确地调用子类的方法的呢？为了深入了解，我们需要探究一下“绑定”这个主题。</p>
+<h3 id="方法调用的绑定"><a href="#方法调用的绑定" class="headerlink" title="方法调用的绑定"></a>方法调用的绑定</h3><ul>
+<li>将一个方法调用同一个方法主体连接到一起就称为“绑定”。</li>
+<li>前期绑定是指在程序运行以前执行绑定（由编译器和连接器）。</li>
+<li>后期绑定是指绑定在运行期间进行，基于对象的类型来绑定。</li>
+<li>Java中除了static或final（private 隐式声明为final）方法，其他的均为后期绑定，因此正常情况下我们并不用去注意Java的后期绑定。</li>
+</ul>
+<h3 id="产生正确的行为"><a href="#产生正确的行为" class="headerlink" title="产生正确的行为"></a>产生正确的行为</h3><p>因为Java中大多数方法都是后期绑定的，因此我们大可直接和基类交互，而这些代码对子类一样有效。即“将一条消息发给一个对象，让对象自行判断要做什么事情。”</p>
+<p>下面介绍一个面向对象中的经典例子。如下是一副继承图，向我们展示了Shape类及其衍生类的继承关系：<br><img src="java6/6-1.png" alt=""><br>因此，向上造型语句可以这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Shape s = new Circle();</div></pre></td></tr></table></figure></p>
+<p>以上语句将Circle对象赋值给了一个Shape类型的对象，而后期绑定把Shape类型（基类）的方法用衍生类（Circle）的方法覆盖，因此，当我们调用s.draw()时，调用的将是Circle类的draw()方法。这相当于，Shape类为所有的子类提供了统一的接口，而子类负责使用这些接口方法去实现各自的功能。当然，我们只能调用基类提供的公共方法，而不能是衍生类自己的公共方法（原则上不应该有），因为向上造型将会把除了重写的基类方法以外的所有信息隐藏。</p>
+<p>按照以上原则编写的程序都具有很好的拓展性，需要新功能的话，我们只需继承父类重写方法即可实现。这就体现了多形性的作用：将接口和实现区分开来。</p>
+<h2 id="构造器和多形性"><a href="#构造器和多形性" class="headerlink" title="构造器和多形性"></a>构造器和多形性</h2><h3 id="构造器调用顺序"><a href="#构造器调用顺序" class="headerlink" title="构造器调用顺序"></a>构造器调用顺序</h3><p>衍生类在构造的时候，基类的构造器一定会被调用。那么构造器调用的顺序应该如下：</p>
+<ol>
+<li>调用基类构造器。这个过程将递归进行，即根的构造器先调用，然后是二、三、四……级构造器（若有），直到到达要构造的类的直接父类。</li>
+<li><font color="red">如果构造器中有基类方法，则会调用基类方法（如果在构造的子类中存在重载方法则将调用重载方法）。注意此时基类的变量尚未初始化，可能造成致命错误，而这种错误编译器不会提示！</font></li>
+<li>成员按照声明顺序初始化。</li>
+<li>构造函数体执行。</li>
+</ol>
+<p>Java语言按照这个顺序执行构造器的主要原因是因为这样可以在大多数情况下确保正确初始化所有的对象和数据。又由于在构造器中调用函数可能会产生各种隐含的问题，<strong>书写构造器的重要原则就是：尽量精炼，如非必要不要调用方法进行初始化。</strong></p>
+<h3 id="继承与清理"><a href="#继承与清理" class="headerlink" title="继承与清理"></a>继承与清理</h3><p>如果继承的时候需要为类配置清理过程，则应该在基类中加入一个清理方法，然后在子类中重写，但注意：</p>
+<ul>
+<li>重写子类方法时应该按照顺序在最后一句调用父类方法（与构造顺序正好相反）</li>
+<li>清理变量（对象引用）时，应该逆着初始化的顺序（即声明顺序）进行清理，因为后初始化的变量可能会用到前一个初始化的变量。</li>
+</ul>
+<p>更复杂的情况下，一个类的成员变量可能被多个类共享。这样，我们就无法像之前那样直接调用清理方法，因为其他的类可能还要使用该变量。因此这时我们可以使用“引用计数”方法，详见下例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Shared shared = <span class="keyword">new</span> Shared();</div><div class="line"></div><div class="line">        ClassUseShared[] a = &#123;<span class="keyword">new</span> ClassUseShared(shared),</div><div class="line">                <span class="keyword">new</span> ClassUseShared(shared),</div><div class="line">                <span class="keyword">new</span> ClassUseShared(shared),</div><div class="line">                <span class="keyword">new</span> ClassUseShared(shared),</div><div class="line">                <span class="keyword">new</span> ClassUseShared(shared),&#125;;</div><div class="line">        <span class="keyword">for</span>(ClassUseShared b:a)&#123;</div><div class="line">            b.dispose();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shared</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> Counter=<span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id=Counter++;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> refCount=<span class="number">0</span>;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addRef</span><span class="params">()</span></span>&#123;</div><div class="line">        refCount++;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispose</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(--refCount==<span class="number">0</span>)</div><div class="line">        System.out.println(<span class="string">"Shared dispose"</span>);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassUseShared</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Shared shared;</div><div class="line">    ClassUseShared(Shared shared)&#123;</div><div class="line">        <span class="keyword">this</span>.shared = shared;</div><div class="line">        shared.addRef();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispose</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"ClassUseShared dispose"</span>);</div><div class="line">        shared.dispose();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//ClassUseShared dispose</span></div><div class="line"><span class="comment">//ClassUseShared dispose</span></div><div class="line"><span class="comment">//ClassUseShared dispose</span></div><div class="line"><span class="comment">//ClassUseShared dispose</span></div><div class="line"><span class="comment">//ClassUseShared dispose</span></div><div class="line"><span class="comment">//Shared dispose</span></div></pre></td></tr></table></figure></p>
+<p>上例通过refCount来统计引用该实例的对象的数量，当refCount为0时调用dipose()方法才会清理该实例。</p>
+<h2 id="泛变的返回类型"><a href="#泛变的返回类型" class="headerlink" title="泛变的返回类型"></a>泛变的返回类型</h2><p>Java重写方法的返回类型不仅可以是一个基类类型，还可以是任何一个衍生类类型（自JavaSE5开始加入）。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">get</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">get</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> B();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可见，get方法在B类中被重写，返回类型变为A的衍生类B。由于向上造型的存在，这样书写并不会产生任何问题，还给了我们更多的自由。</p>
+<h2 id="在设计中使用继承"><a href="#在设计中使用继承" class="headerlink" title="在设计中使用继承"></a>在设计中使用继承</h2><p>继承一般应该用在需要从一个类来创建另一个行为与该类部分相同的类的时候。其他大多数时候我们应该首先考虑可以提供状态切换的组合方法，否则会使程序变得繁琐：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Actor</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">act</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HappyActor</span> <span class="keyword">extends</span> <span class="title">Actor</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">act</span><span class="params">()</span> </span>&#123; print(<span class="string">"HappyActor"</span>); &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SadActor</span> <span class="keyword">extends</span> <span class="title">Actor</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">act</span><span class="params">()</span> </span>&#123; print(<span class="string">"SadActor"</span>); &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stage</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Actor actor = <span class="keyword">new</span> HappyActor();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">()</span> </span>&#123; actor = <span class="keyword">new</span> SadActor(); &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">performPlay</span><span class="params">()</span> </span>&#123; actor.act(); &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Transmogrify</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Stage stage = <span class="keyword">new</span> Stage();</div><div class="line">        stage.performPlay();</div><div class="line">        stage.change();</div><div class="line">        stage.performPlay();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过继承与组合的结合，可以设计出逻辑清晰，执行效率高的程序。</p>
+<h3 id="向下造型和Java运行时类型识别（RTTI）"><a href="#向下造型和Java运行时类型识别（RTTI）" class="headerlink" title="向下造型和Java运行时类型识别（RTTI）"></a>向下造型和Java运行时类型识别（RTTI）</h3><p>当我们向上造型时，我们会屏蔽子类多出的所有信息，其中包含子类新增的接口方法。当我们需要再次使用这些方法的时候，就需要使用向下造型。与向上造型不同，由于子类数量常常大于一个，因此编译器不知道该如何造型，因此<strong>需要进行强制转换</strong>。同时，由于无法判断造型是否合法（类型正确），这样做在其他语言（如C++）往往很危险。然而在Java中引入了<strong>运行时类型识别</strong>（RTTI），使得Java可以在向下造型时<strong>自动判断造型是否正确</strong>，如<strong>不正确将抛出一个ClassCastException异常</strong>。示例如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//文件名：RTTI.java</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Useful</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MoreUseful</span> <span class="keyword">extends</span> <span class="title">Useful</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">u</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">v</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">w</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RTTI</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Useful[] x = &#123;</div><div class="line">                <span class="keyword">new</span> Useful(),</div><div class="line">                <span class="keyword">new</span> MoreUseful()</div><div class="line">        &#125;;</div><div class="line">        x[<span class="number">0</span>].f();</div><div class="line">        x[<span class="number">1</span>].g();</div><div class="line">        <span class="comment">// 编译时错误：未找到方法</span></div><div class="line">        <span class="comment">//! x[1].u();</span></div><div class="line">        ((MoreUseful)x[<span class="number">1</span>]).u(); <span class="comment">// 向下造型/RTTI</span></div><div class="line">        ((MoreUseful)x[<span class="number">0</span>]).u(); <span class="comment">// 抛出异常</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如上示例中，MoreUseful类比子类Useful新增2个接口方法。在数组x初始化中，两个类的实例都被向上造型为了Useful类型，因此直接调用u()方法时无法找到方法，这点很容易理解。然后我们分别对两个实例进行了强制类型转换（向下造型），结果，原来为MoreUseful类的实例成功转换，而原来就是Useful类的实例转换失败。这说明RTTI起了作用，阻止了我们使用x[0]中不存在的方法，也说明向上造型虽然会丢失信息，但这里的丢失是指“屏蔽”，即不可见，而不是删除的意思。</p>
+<p>Java的RTTI机制还有太多的用法，例如确定要操作对象的类型等，将在之后的章节中详细解释。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/13/java5/" rel="next" title="Reusing Classes:类的重用">
+                <i class="fa fa-chevron-left"></i> Reusing Classes:类的重用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="黄泽安" />
+          <p class="site-author-name" itemprop="name">黄泽安</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/thunderbird1997" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多形性"><span class="nav-number">1.</span> <span class="nav-text">多形性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#向上造型"><span class="nav-number">1.1.</span> <span class="nav-text">向上造型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定"><span class="nav-number">1.2.</span> <span class="nav-text">绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法调用的绑定"><span class="nav-number">1.2.1.</span> <span class="nav-text">方法调用的绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生正确的行为"><span class="nav-number">1.2.2.</span> <span class="nav-text">产生正确的行为</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造器和多形性"><span class="nav-number">1.3.</span> <span class="nav-text">构造器和多形性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造器调用顺序"><span class="nav-number">1.3.1.</span> <span class="nav-text">构造器调用顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承与清理"><span class="nav-number">1.3.2.</span> <span class="nav-text">继承与清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛变的返回类型"><span class="nav-number">1.4.</span> <span class="nav-text">泛变的返回类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在设计中使用继承"><span class="nav-number">1.5.</span> <span class="nav-text">在设计中使用继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#向下造型和Java运行时类型识别（RTTI）"><span class="nav-number">1.5.1.</span> <span class="nav-text">向下造型和Java运行时类型识别（RTTI）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄泽安</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
