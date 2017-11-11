@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="接口 Interfaces and abstract classes provide more structured way toseparate interface from implementation.接口和抽象类提供了一种分开接口和实现的更加结构化的方式。  抽象类和抽象方法对于继承树上的基类，往往我们创建它们只是为了创建一个基本结构，而它们的接口方法一般都是没有实现的，即是一个空方法。为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interface:接口">
+<meta property="og:url" content="http://yoursite.com/2017/11/03/java7/index.html">
+<meta property="og:site_name" content="黄泽安的Github博客">
+<meta property="og:description" content="接口 Interfaces and abstract classes provide more structured way toseparate interface from implementation.接口和抽象类提供了一种分开接口和实现的更加结构化的方式。  抽象类和抽象方法对于继承树上的基类，往往我们创建它们只是为了创建一个基本结构，而它们的接口方法一般都是没有实现的，即是一个空方法。为">
+<meta property="og:updated_time" content="2017-11-11T15:22:08.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Interface:接口">
+<meta name="twitter:description" content="接口 Interfaces and abstract classes provide more structured way toseparate interface from implementation.接口和抽象类提供了一种分开接口和实现的更加结构化的方式。  抽象类和抽象方法对于继承树上的基类，往往我们创建它们只是为了创建一个基本结构，而它们的接口方法一般都是没有实现的，即是一个空方法。为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/03/java7/"/>
+
+
+
+
+
+  <title>Interface:接口 | 黄泽安的Github博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄泽安的Github博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-java_learn">
+          <a href="/java_learn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            java学习笔记
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/java7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄泽安">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄泽安的Github博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Interface:接口</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T21:40:13+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">java学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><blockquote>
+<p>Interfaces and abstract classes provide more structured way to<br>separate interface from implementation.<br><br>接口和抽象类提供了一种分开接口和实现的更加结构化的方式。</p>
+</blockquote>
+<h2 id="抽象类和抽象方法"><a href="#抽象类和抽象方法" class="headerlink" title="抽象类和抽象方法"></a>抽象类和抽象方法</h2><p>对于继承树上的基类，往往我们创建它们只是为了创建一个基本结构，而它们的接口方法一般都是没有实现的，即是一个空方法。为了规范，我们可以把这种方法写成抽象方法（<strong>abstract</strong>关键字），把这种类称作抽象类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;         <span class="comment">//抽象类</span></div><div class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span></span>;    <span class="comment">//抽象方法（没有方法主体，有语句结束符！）</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>如果一个类中含有抽象方法，则该类必须被声明为抽象类。</li>
+<li>抽象方法不能被调用，抽象类无法被创建对象。</li>
+<li>如果一个抽象类的子类没有重写所有的抽象方法，则该子类也应该被声明为抽象类。</li>
+</ul>
+<a id="more"></a>
+<p>下面是一个简单的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 文件名：StudentControl.java</span></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrimarySchoolStudent</span> <span class="keyword">extends</span> <span class="title">Student</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"PrimarySchoolStudent.play()"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"PrimarySchoolStudent.study()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">MiddleSchoolStudent</span> <span class="keyword">extends</span> <span class="title">Student</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"MiddleSchoolStudent.play()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SeniorOneStudent</span> <span class="keyword">extends</span> <span class="title">MiddleSchoolStudent</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"SeniorOneStudent.study()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SeniorTwoStudent</span> <span class="keyword">extends</span> <span class="title">MiddleSchoolStudent</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"SeniorTwoStudent.study()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SeniorThreeStudent</span> <span class="keyword">extends</span> <span class="title">MiddleSchoolStudent</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">void</span> <span class="title">study</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"SeniorThreeStudent.study()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentControl</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="comment">//! Student stu = new Student(); 抽象类无法实例化</span></div><div class="line">        Student[] students = &#123;</div><div class="line">                <span class="keyword">new</span> PrimarySchoolStudent(),</div><div class="line">                <span class="keyword">new</span> SeniorOneStudent(),</div><div class="line">                <span class="keyword">new</span> SeniorTwoStudent(),</div><div class="line">                <span class="keyword">new</span> SeniorThreeStudent(),</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">for</span>(Student s:students)&#123;</div><div class="line">            System.out.println(<span class="string">"----------------"</span>);</div><div class="line">            s.play();</div><div class="line">            s.study();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="接口-1"><a href="#接口-1" class="headerlink" title="接口"></a>接口</h2><p>如果说抽象类只是将基类的一部分公共方法进行了抽象，而保留了其他的方法，那么接口则进一步将抽象发挥到了极致：接口只包含抽象方法和常数。也就是说，接口提供的是一种调用形式，而不是任何实现。</p>
+<p>应如下定义和使用接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//文件名：E.java</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span></span>&#123; <span class="comment">//如果是public interface，则需要单独定义在一个同名文件中</span></div><div class="line">    <span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">//常数，即已经隐式声明为static final</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">B</span><span class="params">()</span></span>; <span class="comment">//抽象方法，不用加abstract关键字，而且自动被声明为public方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">implements</span> <span class="title">A</span></span>&#123; <span class="comment">//implement关键字表示将在该类中实现该接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">        System.out.println(<span class="string">"B"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123; <span class="comment">//实现的接口就成为了一个普通类，方法可以被继承和重写</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">        System.out.println(<span class="string">"B"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">E</span></span>&#123;</div><div class="line">    <span class="comment">//将实现A接口的类向上造型为A接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">(A a)</span></span>&#123;</div><div class="line">        a.B();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        doSomething(<span class="keyword">new</span> B());<span class="comment">// 向上造型</span></div><div class="line">        doSomething(<span class="keyword">new</span> D());<span class="comment">// 向上造型</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="完全解耦"><a href="#完全解耦" class="headerlink" title="完全解耦"></a>完全解耦</h2><p>由于类的继承灵活性不够，我们无法灵活地重用已有的代码。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Processer</span></span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//...</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">(Processer p,Object obj)</span></span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure></p>
+<p>其中，process方法只能接收Processer对象及其衍生类。而当我们想要重用这一代码时，就会发现不在Processer继承树内的类型无法重用这一个代码，因此我们有要去写多个process来满足新的需求。接口很好地帮我们解决了这个问题。当我们将Processer定义为接口后，原来在Processer继承树内的类型不受影响，而我们可以在继承树外拓展Processer，如新定义一个继承Processer类的StringProcesser等。位于其他继承树中的类也可以通过适配器模式实现Processer接口从而重用process方法，降低了代码的耦合度。</p>
+<p>语言表述可能有一些不清楚，下面是一个完整的示例。在这个示例中，原来有一个Player类专门用于播放PopMusic,ClassicalMusic。现在有Movie及其子类想要公用play()和name()接口，并且都能被PlayIt()函数直接调用。如果Player仍然是抽象类，那么这样的代码会很难组织，往往牵一发而动全身。因此我们将Player定义为接口，结合适配器模式（见MovieAdapter类，实际上是为Movie衍生类做了一层包装），便可写出简单高效的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 文件名：InterfaceTest.java</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Player</span></span>&#123;</div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PopMusic</span> <span class="keyword">implements</span> <span class="title">Player</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getSimpleName();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"Play pop music!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassicalMusic</span> <span class="keyword">implements</span> <span class="title">Player</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getSimpleName();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"Play classic music!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Movie</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">abstract</span> String <span class="title">name</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cartoon</span> <span class="keyword">extends</span> <span class="title">Movie</span></span>&#123;</div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getSimpleName();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Play Cartoon!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MovieAdapter</span> <span class="keyword">implements</span> <span class="title">Player</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Movie movie;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MovieAdapter</span><span class="params">(Movie movie)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.movie=movie;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">name</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> movie.name();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</div><div class="line">        movie.play();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterfaceTest</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PlayIt</span><span class="params">(Player player)</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"player \""</span>+player.name()+<span class="string">"\" has started."</span>);</div><div class="line">        player.play();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        PlayIt(<span class="keyword">new</span> PopMusic());</div><div class="line">        PlayIt(<span class="keyword">new</span> ClassicalMusic());</div><div class="line">        PlayIt(<span class="keyword">new</span> MovieAdapter(<span class="keyword">new</span> Cartoon()));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Java中的“多重继承”"><a href="#Java中的“多重继承”" class="headerlink" title="Java中的“多重继承”"></a>Java中的“多重继承”</h2><p>Java中，我们最多可以继承一个类（抽象类或普通的类），但我们却可以在一个类中实现许多接口（数量没有限制）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 文件名：Adventure.java</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CanFight</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fight</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CanSwim</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swim</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CanFly</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActionCharacter</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fight</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hero</span> <span class="keyword">extends</span> <span class="title">ActionCharacter</span></span></div><div class="line">        <span class="keyword">implements</span> <span class="title">CanFight</span>, <span class="title">CanSwim</span>, <span class="title">CanFly</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swim</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adventure</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">t</span><span class="params">(CanFight x)</span> </span>&#123; x.fight(); &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">u</span><span class="params">(CanSwim x)</span> </span>&#123; x.swim(); &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">v</span><span class="params">(CanFly x)</span> </span>&#123; x.fly(); &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">w</span><span class="params">(ActionCharacter x)</span> </span>&#123; x.fight(); &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Hero h = <span class="keyword">new</span> Hero();</div><div class="line">        t(h); <span class="comment">// Treat it as a CanFight</span></div><div class="line">        u(h); <span class="comment">// Treat it as a CanSwim</span></div><div class="line">        v(h); <span class="comment">// Treat it as a CanFly</span></div><div class="line">        w(h); <span class="comment">// Treat it as an ActionCharacter</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Hero类同时结合了三个接口CanFight,CanSwim,CanFly，并且可以同时向上造型为三个接口类型。这也是多重继承的主要目的。当我们在创建基类的时候，我们应该试着考虑是否可以将这个基类定义为接口。</p>
+<p>同时，我们可以使用继承来拓展接口。另外，在接口继承接口的时候，extends关键字允许多重继承。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 文件名：InterfaceExtend.java</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">A</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">do1</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">do2</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">implements</span> <span class="title">B</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">do1</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"A.do1"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">do2</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"A.do2"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterfaceExtend</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        C c = <span class="keyword">new</span> C();</div><div class="line">        c.do1();</div><div class="line">        c.do2();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//输出：</span></div><div class="line"><span class="comment">//A.do1</span></div><div class="line"><span class="comment">//A.do2</span></div></pre></td></tr></table></figure></p>
+<p>另外，我们应该尽量避免在会被同一个类使用的接口和抽象类/实体类中设计方法名称相同，只有返回类和参数类型不同的方法，这样会导致关系的错乱而得到意向不到的结果。</p>
+<p>基于接口的这些特性，使得我们在使用接口时及其容易写出可随时拓展的代码。因为，无论如何，只要一个类实现了接口，就可以作为参数被传递并被向上造型为接口方法。这种便利对库的使用者十分有用，这使我们可以为库增添更多功能，或基于库的原有功能集成开发新的库。</p>
+<h2 id="接口中的常量"><a href="#接口中的常量" class="headerlink" title="接口中的常量"></a>接口中的常量</h2><p>在接口中定义的数据成员会被自动声明为static final，即常量。JavaSE5中这时唯一的创建枚举类型的方法。但是自JavaSE5开始，enum的出现满足了这种需求，现在很少用接口来做枚举了。</p>
+<p>接口中的常量可以和普通的常量一样用方法为其赋值。例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RandVals</span> </span>&#123;</div><div class="line">    Random RAND = <span class="keyword">new</span> Random(<span class="number">47</span>);</div><div class="line">    <span class="keyword">int</span> RANDOM_INT = RAND.nextInt(<span class="number">10</span>);</div><div class="line">    <span class="keyword">long</span> RANDOM_LONG = RAND.nextLong() * <span class="number">10</span>;</div><div class="line">    <span class="keyword">float</span> RANDOM_FLOAT = RAND.nextLong() * <span class="number">10</span>;</div><div class="line">    <span class="keyword">double</span> RANDOM_DOUBLE = RAND.nextDouble() * <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="接口嵌套"><a href="#接口嵌套" class="headerlink" title="接口嵌套"></a>接口嵌套</h2><p>接口可以互相嵌套：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//文件名：NestingInterfaces.java</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">B</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BImp</span> <span class="keyword">implements</span> <span class="title">B</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">BImp2</span> <span class="keyword">implements</span> <span class="title">B</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">C</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">CImp</span> <span class="keyword">implements</span> <span class="title">C</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">CImp2</span> <span class="keyword">implements</span> <span class="title">C</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">interface</span> <span class="title">D</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">DImp</span> <span class="keyword">implements</span> <span class="title">D</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DImp2</span> <span class="keyword">implements</span> <span class="title">D</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> D <span class="title">getD</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> DImp2(); &#125;</div><div class="line">    <span class="keyword">private</span> D dRef;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiveD</span><span class="params">(D d)</span> </span>&#123;</div><div class="line">        dRef = d;</div><div class="line">        dRef.f();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">E</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">G</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 多余的public:</span></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">H</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span></span>;</div><div class="line">    <span class="comment">// Cannot be private within an interface:</span></div><div class="line">    <span class="comment">//! private interface I &#123;&#125;</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NestingInterfaces</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BImp</span> <span class="keyword">implements</span> <span class="title">A</span>.<span class="title">B</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">CImp</span> <span class="keyword">implements</span> <span class="title">A</span>.<span class="title">C</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 无法在除了拥有私有接口的类以外的其他地方实现接口</span></div><div class="line">    <span class="comment">//! class DImp implements A.D &#123;</span></div><div class="line">    <span class="comment">//! public void f() &#123;&#125;</span></div><div class="line">    <span class="comment">//! &#125;</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">EImp</span> <span class="keyword">implements</span> <span class="title">E</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">EGImp</span> <span class="keyword">implements</span> <span class="title">E</span>.<span class="title">G</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">EImp2</span> <span class="keyword">implements</span> <span class="title">E</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">EG</span> <span class="keyword">implements</span> <span class="title">E</span>.<span class="title">G</span> </span>&#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        A a = <span class="keyword">new</span> A();</div><div class="line">        <span class="comment">// 无法获取A.D:</span></div><div class="line">        <span class="comment">//! A.D ad = a.getD();</span></div><div class="line">        <span class="comment">// 只能返回A.D:</span></div><div class="line">        <span class="comment">//! A.DImp2 di2 = a.getD();</span></div><div class="line">        <span class="comment">// 无法获得接口的成员:</span></div><div class="line">        <span class="comment">//! a.getD().f();</span></div><div class="line">        <span class="comment">// 只有A可以使用A.D:</span></div><div class="line">        A a2 = <span class="keyword">new</span> A();</div><div class="line">        a2.receiveD(a.getD());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上代码展示了以下信息：</p>
+<ul>
+<li>接口可以是private的。private接口无法在除了拥有它的类以外的其他地方被实现。因此private的接口作用是可以强制实现接口中的方法，而不允许该类被向上造型为该接口。</li>
+<li>E接口告诉我们接口可以嵌套，而嵌套的接口将被强制为public接口。当我们实现一个接口时，我们不一定要实现嵌套的其他接口。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/22/java6/" rel="next" title="Polymorphism:多形性">
+                <i class="fa fa-chevron-left"></i> Polymorphism:多形性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="黄泽安" />
+          <p class="site-author-name" itemprop="name">黄泽安</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/thunderbird1997" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#接口"><span class="nav-number">1.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类和抽象方法"><span class="nav-number">1.1.</span> <span class="nav-text">抽象类和抽象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口-1"><span class="nav-number">1.2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完全解耦"><span class="nav-number">1.3.</span> <span class="nav-text">完全解耦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中的“多重继承”"><span class="nav-number">1.4.</span> <span class="nav-text">Java中的“多重继承”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口中的常量"><span class="nav-number">1.5.</span> <span class="nav-text">接口中的常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口嵌套"><span class="nav-number">1.6.</span> <span class="nav-text">接口嵌套</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄泽安</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
